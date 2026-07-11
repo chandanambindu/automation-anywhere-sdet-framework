@@ -1,6 +1,7 @@
 const { test, expect } = require('../../fixtures/base');
 const AuthApi = require('../../api/authApi');
 const FormApi = require('../../api/formApi');
+const { expectOkAndJson } = require('../../utils/apiHelpers');
 const env = require('../../config/env');
 
 const USERNAME = process.env.USERNAME || env.username;
@@ -22,8 +23,7 @@ if (!USERNAME || !PASSWORD) {
       expect(token).toBeTruthy();
 
       const formResponse = await formApi.listForms(token);
-      expect(formResponse.ok).toBeTruthy();
-      const formBody = await formResponse.json();
+      const formBody = await expectOkAndJson(formResponse);
       expect(formBody).toBeTruthy();
     });
   });
