@@ -46,32 +46,13 @@ if (!USERNAME || !PASSWORD) {
       // Upload a file
       const uploadFilePath = fileHelper.ensureFileExists();
       await formBuilder.uploadFile(uploadFilePath);
+      const uploaded = await formBuilder.verifyUploadedFileIndicator(require('path').basename(uploadFilePath));
+      expect(uploaded).toBeTruthy();
 
       // Save the form
       await formBuilder.saveForm();
-
-      // Verify save succeeded - application-specific indicator may vary.
-      // We'll try common success indicators; replace with app-specific selector if needed.
-      const successSelectors = [
-        page.locator('text=Saved'),
-        page.locator('text=successfully'),
-        page.locator('[role="status"]'),
-        page.locator('text=Form saved'),
-      ];
-
-      let found = false;
-      for (const sel of successSelectors) {
-        try {
-          if (await sel.isVisible()) {
-            found = true;
-            break;
-          }
-        } catch (e) {
-          // ignore missing selectors
-        }
-      }
-
-      expect(found).toBeTruthy();
+      const saveSuccess = await formBuilder.verifySaveSuccess(30000);
+      expect(saveSuccess).toBeTruthy();
     });
   });
 }
