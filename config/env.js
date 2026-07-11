@@ -1,0 +1,11 @@
+require('dotenv').config();
+
+module.exports = {
+  baseURL: process.env.BASE_URL || 'https://www.automationanywhere.com/products/enterprise/community-edition',
+  username: process.env.USERNAME || '',
+  password: process.env.PASSWORD || '',
+  timeout: Number(process.env.TEST_TIMEOUT_MS || 60000),
+  retries: Number(process.env.RETRIES || 1),
+  browser: process.env.BROWSER || 'chromium',
+  headless: process.env.HEADLESS !== 'false',
+};

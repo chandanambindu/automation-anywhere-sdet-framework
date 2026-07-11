@@ -1,0 +1,10 @@
+{
+  "form": {
+    "name": "Automation Anywhere Assignment Form",
+    "description": "Form created by Playwright automation"
+  },
+  "controls": {
+    "textBox": "TextBox",
+    "selectFile": "Select File"
+  }
+}
