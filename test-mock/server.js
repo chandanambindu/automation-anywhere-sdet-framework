@@ -22,4 +22,38 @@ app.get('/processes', (req, res) => {
   res.json([{ id: 'proc1', name: 'Mock Process' }]);
 });
 
+// Forms - create, save content, save dependencies
+app.post('/forms', (req, res) => {
+  const payload = req.body || {};
+  const id = `form-${Date.now()}`;
+  res.status(201).json({ id, ...payload });
+});
+
+app.post('/forms/:id/content', (req, res) => {
+  const { id } = req.params;
+  res.status(200).json({ id, saved: true });
+});
+
+app.post('/forms/:id/dependencies', (req, res) => {
+  const { id } = req.params;
+  res.status(200).json({ id, dependenciesSaved: true });
+});
+
+// Processes - create, save content, save dependencies
+app.post('/processes', (req, res) => {
+  const payload = req.body || {};
+  const id = `process-${Date.now()}`;
+  res.status(201).json({ id, ...payload });
+});
+
+app.post('/processes/:id/content', (req, res) => {
+  const { id } = req.params;
+  res.status(200).json({ id, saved: true });
+});
+
+app.post('/processes/:id/dependencies', (req, res) => {
+  const { id } = req.params;
+  res.status(200).json({ id, dependenciesSaved: true });
+});
+
 app.listen(port, () => console.log(`Mock API listening on http://localhost:${port}`));

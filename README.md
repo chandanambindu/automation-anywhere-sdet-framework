@@ -76,3 +76,35 @@ npm run report
 - HTML report: `reports/html`
 - JUnit XML: `reports/junit/results.xml`
 - Traces, screenshots, and videos are retained on failure.
+
+## Quickstart (mock mode)
+
+1. Install dependencies:
+
+```bash
+npm install
+npx playwright install --with-deps
+```
+
+2. Start the local mock API server (development):
+
+```bash
+node test-mock/server.js
+```
+
+3. Copy `.env.example.mock` to `.env` and edit if needed (do NOT commit `.env`):
+
+```bash
+cp .env.example.mock .env
+```
+
+4. Run API tests (they will target `API_BASE_URL` defined in `.env`):
+
+```bash
+npx playwright test tests/api --reporter=list --workers=1
+```
+
+Notes:
+- The `test-mock` server is for local development and CI where the real backend is not available.
+- Do not commit real credentials or access tokens; keep `.env` in `.gitignore`.
+- To run tests against the real backend, set `API_BASE_URL` to the real API host and ensure credentials are present in your local `.env`.
