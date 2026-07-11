@@ -1,0 +1,29 @@
+{
+  "name": "automation-anywhere-sdet-framework",
+  "version": "1.0.0",
+  "description": "Production-grade Playwright automation framework for Automation Anywhere Community Edition",
+  "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test tests/ui",
+    "test:api": "playwright test tests/api",
+    "test:headed": "HEADLESS=false playwright test",
+    "test:debug": "playwright test --debug",
+    "report": "playwright show-report ./reports/html",
+    "test:trace": "playwright show-trace",
+    "install:browsers": "playwright install --with-deps"
+  },
+  "keywords": [
+    "automation",
+    "sdet",
+    "playwright",
+    "testing",
+    "page-object-model"
+  ],
+  "author": "SDET Framework",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.45.0",
+    "dotenv": "^16.3.1"
+  }
+}
