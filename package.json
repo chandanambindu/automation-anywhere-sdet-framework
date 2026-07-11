@@ -7,7 +7,10 @@
     "test": "npx playwright test",
     "test:ui": "npx playwright test tests/ui",
     "test:api": "npx playwright test tests/api",
-    "report": "npx playwright show-report reports/html"
+    "report": "npx playwright show-report reports/html",
+    "start:mock": "node test-mock/server.js",
+    "collect-artifacts": "node scripts/collectArtifacts.js",
+    "logs:tail": "tail -n 200 -f logs/latest.log || true"
   },
   "keywords": [
     "playwright",

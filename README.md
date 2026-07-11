@@ -108,3 +108,42 @@ Notes:
 - The `test-mock` server is for local development and CI where the real backend is not available.
 - Do not commit real credentials or access tokens; keep `.env` in `.gitignore`.
 - To run tests against the real backend, set `API_BASE_URL` to the real API host and ensure credentials are present in your local `.env`.
+
+## Reporting, Logging, and Artifacts
+
+- Playwright HTML report is generated in `reports/html`. Open it with:
+
+```bash
+npm run report
+```
+
+- Logs are written to `logs/latest.log` by the framework logger. Tail them with:
+
+```bash
+npm run logs:tail
+```
+
+- To gather test artifacts (reports, test-results, screenshots, traces, logs):
+
+```bash
+npm run collect-artifacts
+```
+
+This will produce an archive under `reports/artifacts-<timestamp>.tar.gz`.
+
+## Final validation
+
+1. Start the mock server (or point `API_BASE_URL` to the real API):
+
+```bash
+npm run start:mock
+```
+
+2. Run the full test suite:
+
+```bash
+npm test
+```
+
+3. Collect artifacts and open the HTML report when finished.
+
