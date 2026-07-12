@@ -7,20 +7,46 @@ class DashboardPage extends BasePage {
     this.automationMenuItem = page.locator('text=Automation').first();
   }
 
-  async openAutomation() {
-    const selectors = [
+  async waitForDashboardReady(timeout = 60000) {
+    const readySelectors = [
       'text=Automation',
+      'text=Home',
+      'text=Explore',
+      '[role="navigation"]',
+      'aside',
+    ];
+
+    const start = Date.now();
+    while (Date.now() - start < timeout) {
+      for (const sel of readySelectors) {
+        const loc = this.page.locator(sel).first();
+        if (await loc.count() > 0 && await loc.isVisible().catch(() => false)) {
+          return;
+        }
+      }
+      await this.page.waitForTimeout(1000);
+    }
+
+    throw new Error('Dashboard did not become ready in time');
+  }
+
+  async openAutomation() {
+    await this.waitForDashboardReady();
+    const selectors = [
+      'a[name="automations"]',
       'a:has-text("Automation")',
-      'nav >> text=Automation',
-      '[role="navigation"] >> text=Automation',
+      '[role="navigation"] >> a:has-text("Automation")',
+      'nav >> a:has-text("Automation")',
+      'text=Automation',
       'text=Automations',
     ];
 
     for (const sel of selectors) {
       const loc = this.page.locator(sel).first();
       try {
-        if (await loc.isVisible()) {
-          await loc.click();
+        if (await loc.count() > 0) {
+          await loc.waitFor({ state: 'visible', timeout: 10000 });
+          await loc.click({ force: true });
           return;
         }
       } catch (e) {
@@ -28,47 +54,19 @@ class DashboardPage extends BasePage {
       }
     }
 
-    // Last ditch: try clicking any sidebar link that contains 'Automation' text with a timeout
-    try {
-      await this.page.waitForSelector('text=Automation', { timeout: 10000 });
-      await this.page.locator('text=Automation').first().click();
-      return;
-    } catch (e) {
-      // Fallback: navigate directly to the automation repository route
+    // Last ditch: wait for an Automation navigation target and click it.
+    for (const sel of selectors) {
+      const loc = this.page.locator(sel).first();
       try {
-        const base = process.env.BASE_URL || env.baseURL || process.env.API_BASE_URL || env.apiBaseURL || 'https://community.cloud.automationanywhere.digital';
-        const target = `${base}/#/bots/repository/private/folders/${process.env.BOTS_FOLDER_ID || env.botsFolderId || '32996145'}`;
-        // try several navigation strategies
-        try {
-          await this.page.goto(target, { waitUntil: 'networkidle', timeout: 45000 });
-        } catch (navErr) {
-          try {
-            await this.page.goto(target, { waitUntil: 'domcontentloaded', timeout: 45000 });
-          } catch (navErr2) {
-            // try origin then navigate to fragment
-            try {
-              const urlObj = new URL(target);
-              await this.page.goto(urlObj.origin, { waitUntil: 'domcontentloaded', timeout: 30000 });
-              await this.page.goto(target, { waitUntil: 'domcontentloaded', timeout: 30000 });
-            } catch (navErr3) {
-              // last resort: ignore navigation error and try to find Automation link on current page
-            }
-          }
-        }
-
-        // attempt to click automation link again if visible
-        const loc = this.page.locator('text=Automation').first();
-        if (await loc.count() > 0 && await loc.isVisible().catch(() => false)) {
-          await loc.click().catch(() => {});
-        }
-        // if still not found, log and allow caller to decide
+        await loc.waitFor({ state: 'visible', timeout: 15000 });
+        await loc.click({ force: true });
         return;
-      } catch (e2) {
-        // Log and continue — caller test should handle missing navigation gracefully
-        console.warn('Dashboard openAutomation fallback navigation failed:', e2.message || e2);
-        return;
+      } catch (e) {
+        // ignore; try next selector
       }
     }
+
+    throw new Error('Automation menu item not found or not visible');
   }
 }
 

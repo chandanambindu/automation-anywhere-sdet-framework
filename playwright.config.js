@@ -11,7 +11,10 @@ module.exports = defineConfig({
     timeout: Number(process.env.EXPECT_TIMEOUT_MS || 10000),
   },
   retries: Number(process.env.RETRIES || 1),
-  workers: process.env.CI ? 2 : undefined,
+  // Run tests serially by default to avoid account/session collisions
+  // during parallel UI runs against the shared cloud environment.
+  // Set WORKERS env var to override if parallel runs are desired.
+  workers: process.env.WORKERS ? Number(process.env.WORKERS) : 1,
   reporter: [
     ['html', { outputFolder: 'reports/html', open: 'never' }],
     ['list'],

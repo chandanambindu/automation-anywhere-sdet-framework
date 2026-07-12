@@ -53,42 +53,36 @@ class LoginPage extends BasePage {
       }
     }
 
-    const usernameSel = 'input[name="username"]';
-    const passwordSel = 'input[name="password"]';
-    const loginBtnSel = 'button[name="submitLogin"], button[type="submit"], button:has-text("Log in"), button:has-text("Login")';
+    const usernameSel = 'input[name="username"]:visible';
+    const passwordSel = 'input[name="password"]:visible';
+    const loginBtnSel = 'button[name="submitLogin"]:visible, button:has-text("Log in"):visible, button:has-text("Login"):visible';
 
     try {
-      // Wait for username or password input to appear
-      await Promise.race([
-        this.page.waitForSelector(usernameSel, { state: 'visible', timeout: 30000 }),
-        this.page.waitForSelector(passwordSel, { state: 'visible', timeout: 30000 }),
+      await this.page.waitForSelector(usernameSel, { state: 'visible', timeout: 30000 });
+      await this.page.waitForSelector(passwordSel, { state: 'visible', timeout: 30000 });
+
+      const usernameField = this.page.locator(usernameSel).first();
+      const passwordField = this.page.locator(passwordSel).first();
+      await usernameField.click({ force: true });
+      await usernameField.fill(username, { timeout: 5000 });
+      await passwordField.click({ force: true });
+      await passwordField.fill(password, { timeout: 5000 });
+
+      const loginBtn = this.page.locator(loginBtnSel).first();
+      await loginBtn.waitFor({ state: 'visible', timeout: 10000 });
+      await this.page.waitForFunction(
+        selector => {
+          const el = document.querySelector(selector);
+          return el && !el.disabled;
+        },
+        'button[name="submitLogin"], button:has-text("Log in"), button:has-text("Login")',
+        { timeout: 10000 }
+      ).catch(() => {});
+
+      await Promise.all([
+        this.page.waitForNavigation({ waitUntil: 'networkidle', timeout: 60000 }).catch(() => {}),
+        loginBtn.click({ force: true }),
       ]);
-
-      // Try normal fills first
-      try {
-        await this.page.locator(usernameSel).fill(username, { timeout: 5000 });
-        await this.page.locator(passwordSel).fill(password, { timeout: 5000 });
-      } catch (e) {
-        // Fallback: set values via JS and remove tabindex which may block interaction
-        await this.page.evaluate((uSel, pSel, uVal, pVal) => {
-          const elU = document.querySelector(uSel);
-          const elP = document.querySelector(pSel);
-          if (elU) {
-            try { elU.removeAttribute('tabindex'); } catch (e) {}
-            elU.value = uVal;
-            elU.dispatchEvent(new Event('input', { bubbles: true }));
-          }
-          if (elP) {
-            try { elP.removeAttribute('tabindex'); } catch (e) {}
-            elP.value = pVal;
-            elP.dispatchEvent(new Event('input', { bubbles: true }));
-          }
-        }, usernameSel, passwordSel, username, password);
-      }
-
-      // Click login
-      await this.page.waitForSelector(loginBtnSel, { state: 'visible', timeout: 10000 });
-      await this.page.locator(loginBtnSel).first().click();
     } catch (err) {
       await this.page.screenshot({ path: 'screenshots/login-error.png', fullPage: true }).catch(() => {});
       throw err;

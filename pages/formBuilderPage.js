@@ -409,7 +409,7 @@ class FormBuilderPage extends BasePage {
         // verify files attached
         try {
           const count = await fileInput.evaluate((el) => (el.files ? el.files.length : 0));
-          if (count > 0) return;
+          if (count > 0) return true;
         } catch (e) {}
       }
     } catch (e) {}
@@ -430,7 +430,7 @@ class FormBuilderPage extends BasePage {
           await this.page.waitForTimeout(500);
           try {
             const count2 = await fileInput2.evaluate((el) => (el.files ? el.files.length : 0));
-            if (count2 > 0) return;
+            if (count2 > 0) return true;
           } catch (e) {}
         }
       }
@@ -482,7 +482,7 @@ class FormBuilderPage extends BasePage {
             }, uniqueId);
 
             await this.page.waitForTimeout(500);
-            return;
+            return true;
           }
         }
       }
@@ -498,7 +498,7 @@ class FormBuilderPage extends BasePage {
         if (await fileInput3.count() > 0) {
           await fileInput3.setInputFiles(filePath);
           await this.page.waitForTimeout(500);
-          return;
+          return true;
         }
       }
     } catch (e) {}
@@ -547,6 +547,24 @@ class FormBuilderPage extends BasePage {
     } catch (e) {
       // ignore property panel inspection errors
     }
+
+    // Check active file inputs for attached upload state
+    try {
+      const fileInputs = root.locator('input[type="file"]');
+      if (await fileInputs.count() > 0) {
+        const handles = await fileInputs.elementHandles();
+        for (const h of handles) {
+          try {
+            const name = await h.evaluate((el) => (el.files && el.files.length ? el.files[0].name : null));
+            if (name === fileName) {
+              await h.dispose();
+              return true;
+            }
+          } catch (e) {}
+          try { await h.dispose(); } catch (e) {}
+        }
+      }
+    } catch (e) {}
 
     // Broad search across root for links/images/text matching file name or partial
     try {

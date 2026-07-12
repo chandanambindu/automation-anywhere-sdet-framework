@@ -39,18 +39,11 @@ class AutomationPage extends BasePage {
     }
 
     if (!createBtn) {
-      // Fallback: navigate to repository page and retry
-      try {
-        const env = require('../config/env');
-        const base = process.env.BASE_URL || env.baseURL || process.env.API_BASE_URL || env.apiBaseURL || 'https://community.cloud.automationanywhere.digital';
-        const target = `${base}/#/bots/repository`;
-        await this.page.goto(target, { waitUntil: 'domcontentloaded', timeout: 30000 });
-        await this.page.waitForTimeout(1000);
-        for (const sel of createBtnSelectors) {
-          const loc = this.page.locator(sel).first();
-          if (await loc.count() > 0 && await loc.isVisible().catch(() => false)) { createBtn = loc; break; }
-        }
-      } catch (e) {}
+      await this.page.waitForTimeout(1500);
+      for (const sel of createBtnSelectors) {
+        const loc = this.page.locator(sel).first();
+        if (await loc.count() > 0 && await loc.isVisible().catch(() => false)) { createBtn = loc; break; }
+      }
     }
 
     if (!createBtn) throw new Error('Automation menu item not found or not visible');
