@@ -9,7 +9,7 @@ class ProcessApi extends BaseApiClient {
   }
 
   authHeaders(token) {
-    return token ? { 'X-Authorization': token, Authorization: `Bearer ${token}` } : {};
+    return token ? { 'X-Authorization': token } : {};
   }
 
   async listProcesses(token, query) {

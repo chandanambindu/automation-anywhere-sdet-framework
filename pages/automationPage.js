@@ -9,7 +9,52 @@ class AutomationPage extends BasePage {
   async openCreateForm() {
     await this.dismissOverlays();
 
-    const createBtn = this.page.locator('button[name="createOptions"]').first();
+    const createBtnSelectors = [
+      'button[name="createOptions"]',
+      'button:has-text("Create")',
+      'button[aria-label*="Create"]',
+      'a:has-text("Create")',
+    ];
+
+    let createBtn = null;
+    for (const sel of createBtnSelectors) {
+      const loc = this.page.locator(sel).first();
+      try {
+        if (await loc.count() > 0 && await loc.isVisible().catch(() => false)) {
+          createBtn = loc;
+          break;
+        }
+      } catch (e) {}
+    }
+
+    if (!createBtn) {
+      // try waiting a bit and re-query
+      try {
+        await this.page.waitForTimeout(1000);
+        for (const sel of createBtnSelectors) {
+          const loc = this.page.locator(sel).first();
+          if (await loc.count() > 0 && await loc.isVisible().catch(() => false)) { createBtn = loc; break; }
+        }
+      } catch (e) {}
+    }
+
+    if (!createBtn) {
+      // Fallback: navigate to repository page and retry
+      try {
+        const env = require('../config/env');
+        const base = process.env.BASE_URL || env.baseURL || process.env.API_BASE_URL || env.apiBaseURL || 'https://community.cloud.automationanywhere.digital';
+        const target = `${base}/#/bots/repository`;
+        await this.page.goto(target, { waitUntil: 'domcontentloaded', timeout: 30000 });
+        await this.page.waitForTimeout(1000);
+        for (const sel of createBtnSelectors) {
+          const loc = this.page.locator(sel).first();
+          if (await loc.count() > 0 && await loc.isVisible().catch(() => false)) { createBtn = loc; break; }
+        }
+      } catch (e) {}
+    }
+
+    if (!createBtn) throw new Error('Automation menu item not found or not visible');
+
     await createBtn.waitFor({ state: 'visible', timeout: 10000 });
     await createBtn.click();
     await this.page.waitForTimeout(600);

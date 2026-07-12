@@ -194,33 +194,53 @@ class FormBuilderPage extends BasePage {
     await source.waitFor({ state: 'visible', timeout: 30000 });
     await target.waitFor({ state: 'visible', timeout: 30000 });
 
-    // First try the built-in dragTo which is usually fine inside same-frame contexts
-    try {
-      await source.dragTo(target, { force: true });
-      return;
-    } catch (error) {
-      // fallback to mouse-based drag which works across frames and complex canvases
-    }
-
-    // Mouse-based fallback
-    const srcHandle = await source.elementHandle().catch(() => null);
-    const destHandle = await target.elementHandle().catch(() => null);
-    if (srcHandle && destHandle) {
-      const srcBox = await srcHandle.boundingBox();
-      const destBox = await destHandle.boundingBox();
-      if (srcBox && destBox) {
-        await this.page.mouse.move(srcBox.x + srcBox.width / 2, srcBox.y + srcBox.height / 2);
-        await this.page.mouse.down();
-        await this.page.mouse.move(destBox.x + destBox.width / 2, destBox.y + destBox.height / 2, { steps: 12 });
-        await this.page.mouse.up();
-        try { await srcHandle.dispose(); } catch (e) {}
-        try { await destHandle.dispose(); } catch (e) {}
+    // Try multiple strategies with retries to handle flakiness
+    const attempts = 3;
+    for (let attempt = 1; attempt <= attempts; attempt++) {
+      try {
+        // Strategy A: built-in dragTo
+        await source.scrollIntoViewIfNeeded().catch(() => {});
+        await target.scrollIntoViewIfNeeded().catch(() => {});
+        await source.dragTo(target, { force: true, trial: false });
         return;
+      } catch (error) {
+        // continue to fallback
       }
+
+      try {
+        // Strategy B: mouse-based drag using bounding boxes (works across frames)
+        const srcHandle = await source.elementHandle().catch(() => null);
+        const destHandle = await target.elementHandle().catch(() => null);
+        if (srcHandle && destHandle) {
+          const srcBox = await srcHandle.boundingBox();
+          const destBox = await destHandle.boundingBox();
+          if (srcBox && destBox) {
+            await this.page.mouse.move(srcBox.x + srcBox.width / 2, srcBox.y + srcBox.height / 2);
+            await this.page.mouse.down();
+            await this.page.mouse.move(destBox.x + destBox.width / 2, destBox.y + destBox.height / 2, { steps: 12 });
+            await this.page.mouse.up();
+            try { await srcHandle.dispose(); } catch (e) {}
+            try { await destHandle.dispose(); } catch (e) {}
+            return;
+          }
+        }
+      } catch (e) {
+        // ignore and try DOM fallback
+      }
+
+      try {
+        // Strategy C: DOM-level dispatch
+        await dragAndDrop(this.page, source, target);
+        return;
+      } catch (e) {
+        // final fallback will retry
+      }
+
+      // wait before next attempt
+      await this.page.waitForTimeout(400 + attempt * 200);
     }
 
-    // Last resort: DOM dispatch drag events
-    await dragAndDrop(this.page, source, target);
+    throw new Error(`Unable to drag '${controlName}' to canvas after ${attempts} attempts`);
   }
 
   async dragTextBox() {
@@ -244,7 +264,7 @@ class FormBuilderPage extends BasePage {
     ];
 
     const start = Date.now();
-    const timeout = 15000;
+    const timeout = 20000;
     while (Date.now() - start < timeout) {
       try {
         for (const candidate of candidates) {
@@ -255,11 +275,22 @@ class FormBuilderPage extends BasePage {
               // prefer elementHandle click when available inside frames
               const handle = await element.elementHandle().catch(() => null);
               if (handle) {
-                await handle.click({ force: true }).catch(async () => { await element.click({ force: true }).catch(() => {}); });
+                try {
+                  await handle.click({ force: true });
+                } catch (clickErr) {
+                  // fallback to JS click
+                  await handle.evaluate((el) => el.click()).catch(() => {});
+                }
                 await this.page.waitForTimeout(300);
                 return;
               }
-              await element.click({ force: true });
+              try {
+                await element.scrollIntoViewIfNeeded();
+                await element.click({ force: true });
+              } catch (clickErr) {
+                // JS click fallback
+                await element.evaluate((el) => el.click()).catch(() => {});
+              }
               await this.page.waitForTimeout(300);
               return;
             } catch (e) {
@@ -383,6 +414,10 @@ class FormBuilderPage extends BasePage {
       }
     } catch (e) {}
 
+    // After initial attempts, allow retries to let the UI process the file
+    const start = Date.now();
+    const maxWait = 5000;
+
     // Strategy 2: click a visible 'browse' link/button inside drop zones to reveal input
     try {
       const browse = root.locator('text=browse, text=Browse, a:has-text("browse"), button:has-text("browse")').first();
@@ -467,6 +502,15 @@ class FormBuilderPage extends BasePage {
         }
       }
     } catch (e) {}
+
+    // Final check: give the UI a short time to register any background upload
+    while (Date.now() - start < maxWait) {
+      try {
+        const attached = await this.verifyUploadedFileIndicator((filePath || '').split('/').pop());
+        if (attached) return;
+      } catch (e) {}
+      await this.page.waitForTimeout(300);
+    }
 
     throw new Error('Upload flow could not be automated: no suitable file input or drop area found');
   }

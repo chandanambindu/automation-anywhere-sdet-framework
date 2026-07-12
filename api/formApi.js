@@ -9,7 +9,7 @@ class FormApi extends BaseApiClient {
   }
 
   authHeaders(token) {
-    return token ? { 'X-Authorization': token, Authorization: `Bearer ${token}` } : {};
+    return token ? { 'X-Authorization': token } : {};
   }
 
   async listForms(token, query) {
@@ -22,6 +22,15 @@ class FormApi extends BaseApiClient {
   async getForm(formId, token) {
     return this.get(`/forms/${formId}`, {
       headers: this.authHeaders(token),
+    });
+  }
+
+  async getFormContent(formId, token) {
+    return this.get(`/v2/repository/files/${formId}/content`, {
+      headers: {
+        ...this.authHeaders(token),
+        Accept: 'application/vnd.aa.form',
+      },
     });
   }
 
