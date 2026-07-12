@@ -1,5 +1,6 @@
 const BasePage = require('./basePage');
 const { dragAndDrop } = require('../utils/dom');
+const { expect } = require('@playwright/test');
 
 class FormBuilderPage extends BasePage {
   constructor(page) {
@@ -9,16 +10,35 @@ class FormBuilderPage extends BasePage {
 
   async _getBuilderContext() {
     await this.page.waitForLoadState('domcontentloaded').catch(() => {});
-    const iframeHandle = this.page.locator('iframe.modulepage-frame').first();
-    if (await iframeHandle.count().catch(() => 0)) {
-      return { type: 'frame', frame: this.page.frameLocator('iframe.modulepage-frame').first() };
+    // Prefer the iframe.modulepage-frame when available
+    try {
+      const iframeHandle = this.page.locator('iframe.modulepage-frame').first();
+      if (await iframeHandle.count().catch(() => 0)) {
+        // Use the frame object if possible so we can run locators directly against it
+        const frameObj = this.page.frames().find(f => f.url().includes('module/attended') || f.url().includes('/file/form/') || f.url().includes('form/edit'));
+        if (frameObj) return { type: 'frame', frame: frameObj };
+        return { type: 'frame', frame: this.page.frameLocator('iframe.modulepage-frame').first() };
+      }
+    } catch (e) {}
+
+    // Scan all frames and pick the one that contains both palette items and the canvas/property panel
+    for (const f of this.page.frames()) {
+      try {
+        const hasPalette = await f.locator('button:has-text("Text Box"), button:has-text("Select File"), div.editor-palette-item, div.editor-palette-item__child--is_draggable').count().catch(() => 0);
+        const hasCanvas = await f.locator('div.formcanvas__leftpane, div.formcanvas-content, div.editor-layout__canvas, div.formbuilder-formcanvas, div.formcanvas-container').count().catch(() => 0);
+        const hasProps = await f.locator('div.property-pane, div.editor-details').count().catch(() => 0);
+        if (hasPalette && hasCanvas) {
+          return { type: 'frame', frame: f };
+        }
+        if (hasCanvas && hasProps) {
+          return { type: 'frame', frame: f };
+        }
+      } catch (e) {
+        // ignore frame inspection errors
+      }
     }
-    const frame = this.page.frames().find((f) => {
-      const url = f.url();
-      return /modules\/attended|file\/form|form\/edit|module\/attended/i.test(url)
-        || /modulepage/i.test(f.name());
-    });
-    if (frame) return { type: 'frame', frame };
+
+    // Fallback to page-level context
     return { type: 'page', page: this.page };
   }
 
@@ -36,47 +56,222 @@ class FormBuilderPage extends BasePage {
       await descInput.fill(description);
     }
 
-    const createBtn = this.page.getByRole('button', { name: 'Create & edit' }).first();
-    await createBtn.waitFor({ state: 'visible', timeout: 10000 });
-    await createBtn.click({ force: true });
+    const createBtn = this.page.locator('button:has-text("Create & edit"), button:has-text("Create & Edit"), button:has-text("Create")').first();
+    await createBtn.waitFor({ state: 'visible', timeout: 15000 });
+    await createBtn.click({ force: true }).catch(() => {});
 
-    await this.page.waitForTimeout(1500);
-    await this.page.locator('button:has-text("Text Box"), button:has-text("Select File")').first().waitFor({ state: 'visible', timeout: 20000 }).catch(() => {});
+    // Give the builder some extra time to initialize and expand palette if collapsed
+    await this.page.waitForTimeout(2500);
+
+    // Ensure palette is visible (try page and all frames)
+    try {
+      await this._ensurePaletteVisible();
+    } catch (e) {
+      // ignore; we'll rely on later scanning
+    }
+
+    // Wait for the builder palette to appear in any frame or page context.
+    const start = Date.now();
+    const timeout = 45000;
+    while (Date.now() - start < timeout) {
+      try {
+        // Prefer a detected builder frame
+        const ctx = await this._getBuilderContext();
+        const builderControl = this._ctxLocator(ctx, 'button:has-text("Text Box"), button:has-text("Select File"), div.editor-palette-item, div.editor-palette-item__child--is_draggable').first();
+        if (await builderControl.count() > 0) {
+          await builderControl.waitFor({ state: 'visible', timeout: 5000 }).catch(() => {});
+          return;
+        }
+
+        // As an extra fallback, try to find palette controls by scanning each frame directly
+        for (const f of this.page.frames()) {
+          try {
+            const fc = await f.locator('button:has-text("Text Box"), button:has-text("Select File"), div.editor-palette-item').first();
+            if (fc && await fc.count() > 0) {
+              await fc.waitFor({ state: 'visible', timeout: 3000 }).catch(() => {});
+              return;
+            }
+          } catch (e) {
+            // ignore
+          }
+        }
+      } catch (e) {
+        // ignore and retry
+      }
+      await this.page.waitForTimeout(500);
+    }
+    throw new Error('Timed out waiting for form builder palette to appear');
+  }
+
+  // Try to click a palette toggle if present in the page or in any frame
+  async _ensurePaletteVisible() {
+    const toggleSelectors = ['button[aria-label="Toggle Palette"]', 'button[aria-label="Toggle palette"]', 'button.editor-layout__resize-toggle', 'button[aria-label*="Toggle"]'];
+    // try page-level first
+    for (const sel of toggleSelectors) {
+      const t = this.page.locator(sel).first();
+      if (await t.count() > 0) {
+        try { await t.click({ force: true }); await this.page.waitForTimeout(300); } catch (e) {}
+      }
+    }
+
+    // try inside frames
+    for (const f of this.page.frames()) {
+      for (const sel of toggleSelectors) {
+        try {
+          const t = f.locator(sel).first();
+          if (t && await t.count() > 0) {
+            try { await t.click({ force: true }); await this.page.waitForTimeout(300); } catch (e) {}
+          }
+        } catch (e) {}
+      }
+    }
+  }
+
+  async _getDropTarget(ctx) {
+    const targets = [
+      'div.formcanvas__leftpane',
+      'div.formcanvas-content',
+      'div.editor-layout__canvas',
+      'div.formcanvas-container',
+    ];
+    for (const selector of targets) {
+      const locator = this._ctxLocator(ctx, selector).first();
+      if (await locator.count() > 0) {
+        return locator;
+      }
+    }
+    throw new Error('Unable to find a canvas drop target in the form builder');
+  }
+
+  async _getPaletteItem(ctx, controlName) {
+    const selectors = [
+      `div.editor-palette-item__child--is_draggable:has-text("${controlName}")`,
+      `button:has-text("${controlName}")`,
+      `div.editor-palette-item:has-text("${controlName}")`,
+    ];
+    for (const selector of selectors) {
+      const locator = this._ctxLocator(ctx, selector).first();
+      if (await locator.count() > 0) {
+        return locator;
+      }
+    }
+    throw new Error(`Control palette item '${controlName}' not found in builder palette`);
+  }
+
+  async _dragControlToCanvas(controlName) {
+    const ctx = await this._getBuilderContext();
+    const source = await this._getPaletteItem(ctx, controlName);
+    const target = await this._getDropTarget(ctx);
+
+    await source.waitFor({ state: 'visible', timeout: 30000 });
+    await target.waitFor({ state: 'visible', timeout: 30000 });
+
+    // First try the built-in dragTo which is usually fine inside same-frame contexts
+    try {
+      await source.dragTo(target, { force: true });
+      return;
+    } catch (error) {
+      // fallback to mouse-based drag which works across frames and complex canvases
+    }
+
+    // Mouse-based fallback
+    const srcHandle = await source.elementHandle().catch(() => null);
+    const destHandle = await target.elementHandle().catch(() => null);
+    if (srcHandle && destHandle) {
+      const srcBox = await srcHandle.boundingBox();
+      const destBox = await destHandle.boundingBox();
+      if (srcBox && destBox) {
+        await this.page.mouse.move(srcBox.x + srcBox.width / 2, srcBox.y + srcBox.height / 2);
+        await this.page.mouse.down();
+        await this.page.mouse.move(destBox.x + destBox.width / 2, destBox.y + destBox.height / 2, { steps: 12 });
+        await this.page.mouse.up();
+        try { await srcHandle.dispose(); } catch (e) {}
+        try { await destHandle.dispose(); } catch (e) {}
+        return;
+      }
+    }
+
+    // Last resort: DOM dispatch drag events
+    await dragAndDrop(this.page, source, target);
   }
 
   async dragTextBox() {
-    const ctx = await this._getBuilderContext();
-    const control = this._ctxLocator(ctx, 'button:has-text("Text Box")').first();
-    const canvas = this._ctxLocator(ctx, 'div.formbuilder-formcanvas, div.formcanvas-content, div.editor-layout__canvas').first();
-    await control.waitFor({ state: 'visible', timeout: 30000 });
-    await canvas.waitFor({ state: 'visible', timeout: 30000 });
-    await control.dragTo(canvas, { force: true }).catch(async () => {
-      await this.page.waitForTimeout(500);
-      await control.click({ force: true });
-    });
+    await this._dragControlToCanvas('Text Box');
   }
 
   async dragSelectFile() {
+    await this._dragControlToCanvas('Select File');
+  }
+
+  async clickControlOnCanvas(controlName) {
     const ctx = await this._getBuilderContext();
-    const control = this._ctxLocator(ctx, 'button:has-text("Select File")').first();
-    const canvas = this._ctxLocator(ctx, 'div.formbuilder-formcanvas, div.formcanvas-content, div.editor-layout__canvas').first();
-    await control.waitFor({ state: 'visible', timeout: 30000 });
-    await canvas.waitFor({ state: 'visible', timeout: 30000 });
-    await control.dragTo(canvas, { force: true }).catch(async () => {
+    const canvas = this._ctxLocator(ctx, 'div.formcanvas__leftpane, div.formcanvas-content, div.editor-layout__canvas').first();
+
+    const candidates = [
+      `text=${controlName}`,
+      `text=${controlName.replace(/\s+/g, '')}`,
+      `text=/^${controlName.replace(/\s+/g, '\\s*')}$/i`,
+      `text=/^${controlName.replace(/\s+/g, '')}$/i`,
+    ];
+
+    for (const candidate of candidates) {
+      const element = canvas.locator(candidate).first();
+      if (await element.count() > 0) {
+        await element.waitFor({ state: 'visible', timeout: 10000 });
+        await element.click({ force: true });
+        await this.page.waitForTimeout(500);
+        return;
+      }
+    }
+
+    // Fallback: click any visible inserted control in the canvas if direct text matching fails.
+    const fallbackControl = canvas.locator('div[class*="formcanvas__"] button, div[class*="formcanvas__"] [role="button"], div[data-path*="TextBox"], div[data-path*="SelectFile"], div[data-path*="SelectFolder"]').first();
+    if (await fallbackControl.count() > 0) {
+      await fallbackControl.click({ force: true });
       await this.page.waitForTimeout(500);
-      await control.click({ force: true });
-    });
+      return;
+    }
+
+    throw new Error(`Unable to click control '${controlName}' on the canvas`);
+  }
+
+  async verifyControlProperties(controlName) {
+    const ctx = await this._getBuilderContext();
+    const root = ctx.type === 'frame' ? ctx.frame : this.page;
+    const propPanel = root.locator('div.property-pane, div.editor-details').first();
+    await propPanel.waitFor({ state: 'visible', timeout: 20000 });
+
+    const checks = [
+      `text=${controlName}`,
+      `text=${controlName.replace(/\s+/g, '')}`,
+      'text=Element ID',
+      'text=Element label',
+      'text=Default value',
+      'text=Formatting',
+      'text=Help text option',
+      'text=Hint below field',
+    ];
+
+    for (const check of checks) {
+      if (await propPanel.locator(check).count()) {
+        return;
+      }
+    }
+
+    throw new Error(`Property panel did not show expected content after selecting ${controlName}`);
   }
 
   async verifyPropertiesPanel() {
     const ctx = await this._getBuilderContext();
     const propPanel = this._ctxLocator(ctx, 'div.property-pane, div.editor-details').first();
     await propPanel.waitFor({ state: 'visible', timeout: 10000 });
+    await expect(propPanel).toBeVisible();
   }
 
   async enterText(text) {
     const ctx = await this._getBuilderContext();
-    const textInput = this._ctxLocator(ctx, 'input[type="text"], textarea').first();
+    const root = ctx.type === 'frame' ? ctx.frame : this.page;
+    const textInput = root.locator('div.property-pane input[type="text"], div.property-pane textarea, div.editor-details input[type="text"], div.editor-details textarea').first();
     await textInput.waitFor({ state: 'visible', timeout: 30000 });
     await textInput.fill(text);
   }
@@ -92,48 +287,41 @@ class FormBuilderPage extends BasePage {
       return;
     }
 
-    let browseLink = root.locator('a.preview-label__browseText').first();
-    if (await browseLink.count() === 0) {
-      browseLink = root.getByText('browse', { exact: false }).first();
-    }
-    if (await browseLink.count() === 0) {
-      browseLink = root.locator('text=/browse/i').first();
-    }
-    if (await browseLink.count() === 0) {
-      throw new Error('Browse link not found');
+    const uploadButton = root.locator('button[name="uploadFile"], button[aria-label*="Upload files"]').first();
+    if (await uploadButton.count() === 0) {
+      throw new Error('Upload button not found in builder');
     }
 
-    const [fileChooser] = await Promise.all([
-      this.page.waitForEvent('filechooser'),
-      browseLink.click({ force: true }),
-    ]);
-
-    await fileChooser.setFiles(filePath);
+    await uploadButton.click({ force: true });
     await this.page.waitForTimeout(500);
+    throw new Error('Upload flow is currently unsupported by direct automation: file dialog cannot be attached.');
   }
 
   async verifyUploadedFileIndicator(fileName) {
     const ctx = await this._getBuilderContext();
     const root = ctx.type === 'frame' ? ctx.frame : this.page;
-    const indicators = await root.locator(`text=${fileName}, text=*${fileName}*`).all();
+    const indicators = await root.locator(`text=${fileName}`).all();
     return indicators.length > 0;
   }
 
   async saveForm() {
     const ctx = await this._getBuilderContext();
-    const saveBtn = this._ctxLocator(ctx, 'button:has-text("Save")').first();
+    const saveBtn = this._ctxLocator(ctx, 'button:has-text("Save"), button[name="save"]').first();
     await saveBtn.waitFor({ state: 'visible', timeout: 30000 });
-    await saveBtn.click();
+    await saveBtn.click({ force: true });
+    await this.page.waitForTimeout(1000);
   }
 
   async verifySaveSuccess(timeout = 10000) {
     try {
-      await this.page.locator('text=Saved, text=successfully').first().waitFor({ state: 'visible', timeout });
+      const successLabel = this.page.locator('text=Saved, text=successfully, text=Form saved, text=Saved successfully').first();
+      await successLabel.waitFor({ state: 'visible', timeout });
       return true;
     } catch (e) {
       return false;
     }
   }
 }
+
 
 module.exports = FormBuilderPage;

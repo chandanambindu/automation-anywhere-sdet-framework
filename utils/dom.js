@@ -6,29 +6,31 @@ async function dragAndDrop(page, sourceLocator, targetLocator) {
     throw new Error('dragAndDrop: source or target element not found');
   }
 
-  await page.evaluate(({ src, dest }) => {
-    const source = src;
-    const target = dest;
-    const dataTransfer = new DataTransfer();
+  try {
+    // Try mouse-based drag which works across frames and complex canvases
+    const srcBox = await srcHandle.boundingBox();
+    const destBox = await destHandle.boundingBox();
+    if (!srcBox || !destBox) throw new Error('Could not determine element bounds for drag');
 
-    const fire = (el, type) => {
-      const event = new DragEvent(type, {
-        bubbles: true,
-        cancelable: true,
-        dataTransfer,
-      });
-      el.dispatchEvent(event);
-    };
+    const startX = srcBox.x + srcBox.width / 2;
+    const startY = srcBox.y + srcBox.height / 2;
+    const endX = destBox.x + destBox.width / 2;
+    const endY = destBox.y + destBox.height / 2;
 
-    fire(source, 'dragstart');
-    fire(target, 'dragenter');
-    fire(target, 'dragover');
-    fire(target, 'drop');
-    fire(source, 'dragend');
-  }, { src: srcHandle, dest: destHandle });
-
-  await srcHandle.dispose();
-  await destHandle.dispose();
+    await page.mouse.move(startX, startY);
+    await page.mouse.down();
+    // interpolate a few steps for more realistic drag
+    const steps = 12;
+    for (let i = 1; i <= steps; i++) {
+      const x = startX + (endX - startX) * (i / steps);
+      const y = startY + (endY - startY) * (i / steps);
+      await page.mouse.move(x, y);
+    }
+    await page.mouse.up();
+  } finally {
+    try { await srcHandle.dispose(); } catch (e) {}
+    try { await destHandle.dispose(); } catch (e) {}
+  }
 }
 
 module.exports = {

@@ -1,0 +1,82 @@
+{
+  "frames": [
+    {
+      "name": "",
+      "url": "https://community.cloud.automationanywhere.digital/#/bots/repository/private/files/32998399/module/attended/form/edit"
+    },
+    {
+      "name": "",
+      "url": "https://automation-anywhere.fluidtopics.net/"
+    },
+    {
+      "name": "fluidtopicsclient",
+      "url": "https://automation-anywhere.fluidtopics.net/fluidtopicsclient-hostframe.html"
+    },
+    {
+      "name": "",
+      "url": "https://community.cloud.automationanywhere.digital/modules/attended/#/file/form/32998399/edit"
+    }
+  ],
+  "output": {
+    "bodyText": "Explore\nHome\nAutomation\nAI\nSkills\nModel connections\nDocument Automation\nActivity\nIn progress\nHistorical\nInsights\nManage\nDevices\nGlobal values\nCredentials\nPackages\nAdministration\nUsers\nBC\nbinduchandanamnaidu@gmail.com\nUpgrade to Enterprise Advanced automation capabilities to unleash your organization’s full potential.\n1",
+    "relevant": [
+      {
+        "tag": "HEAD",
+        "text": "auto-form-1783843029610 | Edit form | Control Room | Automation Anywhere\n        \n        \n        \n    .css-custom-prop",
+        "attr": "",
+        "outer": "<head>\n        <title>auto-form-1783843029610 | Edit form | Control Room | Automation Anywhere</title>\n        <meta charset=\"utf-8\">\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n        <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <li"
+      },
+      {
+        "tag": "STYLE",
+        "text": ".css-custom-properties--2 {\n--rio_color_background_danger: #d50032;\n--rio_color_background_danger_heaviest: #7a001d;\n--r",
+        "attr": "type=text/css",
+        "outer": "<style type=\"text/css\">.css-custom-properties--2 {\n--rio_color_background_danger: #d50032;\n--rio_color_background_danger_heaviest: #7a001d;\n--rio_color_background_danger_heaviest_hover: #910023;\n--rio_color_background_danger_heaviest_pressed: #bf002d;\n--rio_color_background_dange"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "AI",
+        "attr": "data-path=Pathfinder.button data-has-items=true name=ai aria-label=AI class=pathfinder-button g-box-sizing_border-box g-reset-element g-focus g-focus--variant_l",
+        "outer": "<button data-path=\"Pathfinder.button\" data-has-items=\"true\" name=\"ai\" aria-label=\"AI\" class=\"pathfinder-button g-box-sizing_border-box g-reset-element g-focus g-focus--variant_light pathfinder-items__item-button pathfinder-items__item-button--variant_primary g-focus--shrink_4px g"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Activity",
+        "attr": "data-path=Pathfinder.button data-has-items=true name=activity aria-label=Activity class=pathfinder-button g-box-sizing_border-box g-reset-element g-focus g-focu",
+        "outer": "<button data-path=\"Pathfinder.button\" data-has-items=\"true\" name=\"activity\" aria-label=\"Activity\" class=\"pathfinder-button g-box-sizing_border-box g-reset-element g-focus g-focus--variant_light pathfinder-items__item-button pathfinder-items__item-button--variant_primary g-focus--"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Manage",
+        "attr": "data-path=Pathfinder.button data-has-items=true name=manage aria-label=Manage class=pathfinder-button g-box-sizing_border-box g-reset-element g-focus g-focus--v",
+        "outer": "<button data-path=\"Pathfinder.button\" data-has-items=\"true\" name=\"manage\" aria-label=\"Manage\" class=\"pathfinder-button g-box-sizing_border-box g-reset-element g-focus g-focus--variant_light pathfinder-items__item-button pathfinder-items__item-button--variant_primary g-focus--shri"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Administration",
+        "attr": "data-path=Pathfinder.button data-has-items=true name=administration aria-label=Administration class=pathfinder-button g-box-sizing_border-box g-reset-element g-",
+        "outer": "<button data-path=\"Pathfinder.button\" data-has-items=\"true\" name=\"administration\" aria-label=\"Administration\" class=\"pathfinder-button g-box-sizing_border-box g-reset-element g-focus g-focus--variant_light pathfinder-items__item-button pathfinder-items__item-button--variant_prima"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "BC\nbinduchandanamnaidu@gmail.com",
+        "attr": "data-path=Pathfinder.button data-has-items=false title=binduchandanamnaidu@gmail.com name=mysettings class=pathfinder-button g-box-sizing_border-box g-reset-ele",
+        "outer": "<button data-path=\"Pathfinder.button\" data-has-items=\"false\" title=\"binduchandanamnaidu@gmail.com\" name=\"mysettings\" class=\"pathfinder-button g-box-sizing_border-box g-reset-element g-focus g-focus--variant_light pathfinder-items__item-button pathfinder-items__item-button--varian"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "1",
+        "attr": "aria-label=Open Resource Center, 1 new notification data-pendo-aria-label-alert-singular=Open Resource Center, {UNSEEN_COUNT} new notification data-pendo-aria-l",
+        "outer": "<button aria-label=\"Open Resource Center, 1 new notification\" data-pendo-aria-label-alert-singular=\"Open Resource Center, {UNSEEN_COUNT} new notification\" data-pendo-aria-label-alert-plural=\"Open Resource Center, {UNSEEN_COUNT} new notification\" aria-expanded=\"false\" type=\"button"
+      }
+    ],
+    "fileInputs": [],
+    "iframes": [
+      {
+        "src": "https://community.cloud.automationanywhere.digital/modules/attended/#/file/form/32998399/edit",
+        "name": "",
+        "outer": "<iframe class=\"modulepage-frame\" src=\"/modules/attended/#/file/form/32998399/edit\"></iframe>"
+      }
+    ],
+    "title": "auto-form-1783843029610 | Edit form | Control Room | Automation Anywhere"
+  }
+}

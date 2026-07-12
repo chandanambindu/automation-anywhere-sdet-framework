@@ -1,0 +1,2859 @@
+{
+  "url": "https://community.cloud.automationanywhere.digital/#/bots/repository/private/folders/32996145",
+  "modalExists": true,
+  "modalOuterHTML": "<div role=\"dialog\" aria-modal=\"true\" dir=\"ltr\" tabindex=\"-1\"><div data-path=\"ModalForm\" data-modal-id=\"repository-action-file-create\" data-modal-loading=\"false\" data-modal-working=\"false\" data-modal-ready=\"true\" class=\"modal-form g-reset-element g-box-sizing_border-box css-custom-properties--2\"><div class=\"modal-form__content g-reset-element repositoryactionfilecreate\"><header data-path=\"ModalForm.header\" class=\"modal-form__content-header\"><h1 class=\"rio-header rio-header--display-variant_page g-reset-element g-box-sizing_border-box rio-header--display-variant_page\" data-path=\"RioHeader\" data-display-variant=\"PAGE\" data-header-label=\"Create form\" data-header-has-close-button=\"true\" data-header-has-save-button=\"true\"><div class=\"rio-header__dynamic-content\"><span data-path=\"ClippedText\" data-text=\"Create form\" class=\"clipped-text clipped-text--no_wrap rio-header__label\"><span class=\"clipped-text__string clipped-text__string--for_presentation\">Create form</span></span><div class=\"rio-hea",
+  "elements": [
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "toasttray",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "ToastTray"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Explore\nHome\nAutomation\nAI\nSkills\nModel connection",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "pathfinder",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "Pathfinder"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": "AI",
+      "placeholder": null,
+      "ariaLabel": "AI",
+      "id": null,
+      "class": "pathfinder-button g-box-sizing_border-box g-reset-element g-focus g-focus--variant_light pathfinder-items__item-button pathfinder-items__item-button--variant_primary g-focus--shrink_4px g-override pathfinder-items__item-button--size_wide",
+      "visible": true,
+      "name": "ai",
+      "dataset": {
+        "path": "Pathfinder.button",
+        "hasItems": "true"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": "Activity",
+      "placeholder": null,
+      "ariaLabel": "Activity",
+      "id": null,
+      "class": "pathfinder-button g-box-sizing_border-box g-reset-element g-focus g-focus--variant_light pathfinder-items__item-button pathfinder-items__item-button--variant_primary g-focus--shrink_4px g-override pathfinder-items__item-button--size_wide",
+      "visible": true,
+      "name": "activity",
+      "dataset": {
+        "path": "Pathfinder.button",
+        "hasItems": "true"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": "Manage",
+      "placeholder": null,
+      "ariaLabel": "Manage",
+      "id": null,
+      "class": "pathfinder-button g-box-sizing_border-box g-reset-element g-focus g-focus--variant_light pathfinder-items__item-button pathfinder-items__item-button--variant_primary g-focus--shrink_4px g-override pathfinder-items__item-button--size_wide",
+      "visible": true,
+      "name": "manage",
+      "dataset": {
+        "path": "Pathfinder.button",
+        "hasItems": "true"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": "Administration",
+      "placeholder": null,
+      "ariaLabel": "Administration",
+      "id": null,
+      "class": "pathfinder-button g-box-sizing_border-box g-reset-element g-focus g-focus--variant_light pathfinder-items__item-button pathfinder-items__item-button--variant_primary g-focus--shrink_4px g-override pathfinder-items__item-button--size_wide",
+      "visible": true,
+      "name": "administration",
+      "dataset": {
+        "path": "Pathfinder.button",
+        "hasItems": "true"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": "BC\nbinduchandanamnaidu@gmail.com",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "pathfinder-button g-box-sizing_border-box g-reset-element g-focus g-focus--variant_light pathfinder-items__item-button pathfinder-items__item-button--variant_user g-focus--shrink_4px g-override pathfinder-items__item-button--size_wide pathfinder-items__item-button--variant_primary",
+      "visible": true,
+      "name": "mysettings",
+      "dataset": {
+        "path": "Pathfinder.button",
+        "hasItems": "false"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": "Collapse",
+      "id": null,
+      "class": "pathfinder-tray-expander g-reset-element g-focus g-focus--extend_4px g-focus--variant_light",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "Pathfinder.expander"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "pathfinder-button g-box-sizing_border-box g-reset-element g-focus g-focus--variant_light pathfinder-items__item-button pathfinder-items__item-button--variant_tray g-override pathfinder-items__item-button--size_wide",
+      "visible": true,
+      "name": "help",
+      "dataset": {
+        "path": "Pathfinder.button",
+        "hasItems": "false"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "pathfinder-button g-box-sizing_border-box g-reset-element g-focus g-focus--variant_light pathfinder-items__item-button pathfinder-items__item-button--variant_tray g-override pathfinder-items__item--variant_tray-button--status_warning pathfinder-items__item-button--size_wide",
+      "visible": true,
+      "name": "device",
+      "dataset": {
+        "path": "Pathfinder.button",
+        "hasItems": "false"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Create\nManage",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-header__primary-toolbar-container",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "RioHeader.toolbar"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Create\nManage",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-toolbar g-box-sizing_border-box rio-header__toolbar rio-toolbar--items-count_2 rio-toolbar--visible-items-count_2 rio-toolbar--hidden-items-count_0 rio-toolbar--position-items_end rio-toolbar--orientation_horizontal",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "RioToolbar"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Create\nManage",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-toolbar__items",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "RioToolbar.items"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Create",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-badger g-reset-element",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "RioBadger"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Create",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "icon-button g-box-sizing_border-box",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "IconButton"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": "Create",
+      "placeholder": null,
+      "ariaLabel": "Create",
+      "id": null,
+      "class": "rio-focus rio-focus--inset_0 rio-focus--border-radius_4px rio-focus--has_element-focus-visible rio-bare-button g-reset-element rio-bare-button--is_interactive rio-bare-button--rio_interactive-softer rio-bare-button--is_parent rio-bare-button--is_clickable rio-bare-button--is_selected rio-bare-button--size_14px rio-bare-button--padding-for-size_14px icon-button__button g-reset-element icon-button__button--has_options",
+      "visible": true,
+      "name": "createOptions",
+      "dataset": {
+        "buttonLoading": "false",
+        "buttonWorking": "false",
+        "buttonReady": "true",
+        "inputStatus": "INTERACTIVE",
+        "poppyParentid": "1"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Manage",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-badger g-reset-element",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "RioBadger"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Manage",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "icon-button g-box-sizing_border-box",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "IconButton"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": "Manage",
+      "placeholder": null,
+      "ariaLabel": "Manage",
+      "id": null,
+      "class": "rio-focus rio-focus--inset_0 rio-focus--border-radius_4px rio-focus--has_element-focus-visible rio-bare-button g-reset-element rio-bare-button--is_interactive rio-bare-button--rio_interactive-softer rio-bare-button--is_parent rio-bare-button--is_clickable rio-bare-button--size_14px rio-bare-button--padding-for-size_14px icon-button__button g-reset-element icon-button__button--has_options",
+      "visible": true,
+      "name": "manageBotsOptions",
+      "dataset": {
+        "buttonLoading": "false",
+        "buttonWorking": "false",
+        "buttonReady": "true",
+        "inputStatus": "INTERACTIVE"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-toolbar-dropdown-parent rio-toolbar-dropdown-parent--is_hidden",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "itemCount": "0",
+        "overflowVisible": "false",
+        "path": "RioToolbar.dropdown"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-badger g-reset-element",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "RioBadger"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-vr rio-header__dropdown-button-vr",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "RioVR"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-focus rio-focus--inset_0 rio-focus--border-radius_4px rio-focus--has_element-focus-visible rio-bare-button g-reset-element rio-bare-button--is_parent rio-bare-button--is_disabled rio-bare-button--size_14px rio-bare-button--is_square rio-bare-button--square_26x26",
+      "visible": true,
+      "name": "header-toolbar-dropdown",
+      "dataset": {
+        "testid": "renderMeatballsDropdownButton",
+        "inputStatus": "DISABLED"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Folders\nBots\nAgentic App Store\nSearch within subfo",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-page__children",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "RioPage.children"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Folders\nBots\nAgentic App Store\nSearch within subfo",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "folder-list g-box-sizing_border-box folder-list--has_children folder-list--layout_horizontal g-margin-block-end-not-last-child_8px",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "FolderList",
+        "value": "32996145"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Folders\nBots\nAgentic App Store",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "resize-flex-pane g-box-sizing_border-box",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "ResizeFlexPane"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": "Refresh folders",
+      "id": null,
+      "class": "rio-focus rio-focus--inset_0 rio-focus--border-radius_4px rio-focus--has_element-focus-visible rio-bare-button g-reset-element rio-bare-button--is_interactive rio-bare-button--rio_interactive-softest rio-bare-button--is_parent rio-bare-button--is_clickable rio-bare-button--size_14px rio-bare-button--is_square rio-bare-button--square_26x26 action-bar__item action-bar__item--is_action folder-list__items-header-action g-override",
+      "visible": true,
+      "name": "refresh",
+      "dataset": {
+        "buttonLoading": "false",
+        "buttonWorking": "false",
+        "buttonReady": "true",
+        "inputStatus": "INTERACTIVE"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Bots",
+      "placeholder": null,
+      "ariaLabel": "Bots",
+      "id": null,
+      "class": "folder-list-item folder-list-item--is_active folder-list-item--is_nested",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "FolderList.item",
+        "itemId": "32996145"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "g-box-sizing_border-box action-bar action-bar--theme_default g-margin-block-end-not-last-child_4px folder-list-item__expand-button g-override",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "ActionBar"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-focus rio-focus--inset_0 rio-focus--border-radius_4px rio-focus--has_element-focus-visible rio-bare-button g-reset-element rio-bare-button--is_interactive rio-bare-button--rio_interactive-blend rio-bare-button--is_parent rio-bare-button--is_clickable rio-bare-button--size_14px rio-bare-button--is_square rio-bare-button--square_26x26 action-bar__item action-bar-expander",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "buttonLoading": "false",
+        "buttonWorking": "false",
+        "buttonReady": "true",
+        "inputStatus": "INTERACTIVE"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": "Bots",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": "32996145",
+      "class": "folder-list-item__label g-reset-element folder-list-item__label--is_clickable g-focus g-focus--shrink_3px",
+      "visible": true,
+      "name": "Automation Anywhere\\Bots",
+      "dataset": {}
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "g-box-sizing_border-box action-bar action-bar--theme_default g-margin-block-end-not-last-child_4px",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "ActionBar"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": "Create subfolder…",
+      "id": null,
+      "class": "rio-focus rio-focus--inset_0 rio-focus--border-radius_4px rio-focus--has_element-focus-visible rio-bare-button g-reset-element rio-bare-button--is_interactive rio-bare-button--rio_interactive-softest rio-bare-button--is_parent rio-bare-button--is_clickable rio-bare-button--size_14px rio-bare-button--is_square rio-bare-button--square_26x26 action-bar__item action-bar__item--is_action",
+      "visible": true,
+      "name": "folder-create",
+      "dataset": {
+        "buttonLoading": "false",
+        "buttonWorking": "false",
+        "buttonReady": "true",
+        "inputStatus": "INTERACTIVE"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Agentic App Store",
+      "placeholder": null,
+      "ariaLabel": "Agentic App Store",
+      "id": null,
+      "class": "folder-list-item folder-list-item--not_active folder-list-item--is_leaf folder-list-item--is_nested",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "FolderList.item",
+        "itemId": "32996146"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "g-box-sizing_border-box action-bar action-bar--theme_default g-margin-block-end-not-last-child_4px folder-list-item__expand-button g-override",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "ActionBar"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-focus rio-focus--inset_0 rio-focus--border-radius_4px rio-focus--has_element-focus-visible rio-bare-button g-reset-element rio-bare-button--is_parent rio-bare-button--is_disabled rio-bare-button--size_14px rio-bare-button--is_square rio-bare-button--square_26x26 action-bar__item action-bar-expander",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "buttonLoading": "false",
+        "buttonWorking": "false",
+        "buttonReady": "true",
+        "inputStatus": "DISABLED"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": "Agentic App Store",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": "32996146",
+      "class": "folder-list-item__label g-reset-element folder-list-item__label--is_clickable g-focus g-focus--shrink_3px",
+      "visible": true,
+      "name": "Automation Anywhere\\Bot Store",
+      "dataset": {}
+    },
+    {
+      "tag": "BUTTON",
+      "type": "submit",
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-focus rio-focus--inset_0 rio-focus--border-radius_4px g-reset-element g-override resize-flex-pane-move-bar__button resize-flex-pane-move-bar__button--is_active",
+      "visible": true,
+      "name": null,
+      "dataset": {}
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Search within subfolders\nName\nFiles and folders\n (",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-managed-table rio-managed-table--is_ready",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "RioManagedTable",
+        "tableId": "repository__private__landing",
+        "tableInstanceId": "32996145",
+        "pending": "false"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Search within subfolders",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "checkbox-input g-box-sizing_border-box g-reset-element checkbox-input--is_checked checkbox-input--is_interactive",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "CheckboxInput",
+        "name": "search-within-subfolders",
+        "inputStatus": "INTERACTIVE",
+        "value": "true"
+      }
+    },
+    {
+      "tag": "INPUT",
+      "type": "checkbox",
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "checkbox-input__input",
+      "visible": true,
+      "name": "search-within-subfolders",
+      "dataset": {}
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Name\nFiles and folders\n (3)\nType\nName\nFolder path\n",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "paged-table",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "PagedTable"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Name",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datafilter g-clear-fix g-box-sizing_border-box datafilter--size_not-xs datafilter--has_filter-selector",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataFilter"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Name",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-select-input g-box-sizing_border-box datafilter__select--active-filter rio-select-input--mode_single rio-select-input--is_interactive rio-select-input--multi-line-mode_single rio-select-input--overflow_hidden rio-select-input--option-flow-direction_column",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "RioSelectInput",
+        "name": "--field.id",
+        "inputStatus": "INTERACTIVE",
+        "value": "name",
+        "expanded": "false"
+      }
+    },
+    {
+      "tag": "INPUT",
+      "type": "text",
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": "Keyboard focus boundary",
+      "id": null,
+      "class": "g-hide-element",
+      "visible": true,
+      "name": null,
+      "dataset": {}
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Name",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-focus rio-focus--inset_1px rio-focus--border-radius_2px rio-select-input-query rio-select-input-query--overflow_hidden",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "RioSelectInputQuery"
+      }
+    },
+    {
+      "tag": "INPUT",
+      "type": "text",
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-select-input-query__input rio-select-input-query__input--no_placeholder",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "RioSelectInputQuery.search-input"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-focus rio-focus--inset_0 rio-focus--border-radius_4px rio-focus--has_element-focus-visible rio-bare-button g-reset-element rio-bare-button--is_interactive rio-bare-button--rio_interactive-softest rio-bare-button--is_parent rio-bare-button--is_clickable rio-bare-button--size_12px rio-bare-button--is_square rio-bare-button--square_22x22",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "RioSelectInputQuery.toggle-button",
+        "inputStatus": "INTERACTIVE"
+      }
+    },
+    {
+      "tag": "INPUT",
+      "type": "text",
+      "text": null,
+      "placeholder": "Search",
+      "ariaLabel": "Search",
+      "id": null,
+      "class": "datafiltersearch-input g-reset-element",
+      "visible": true,
+      "name": "--filter.query",
+      "dataset": {
+        "path": "DataFilter.filter.search"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Files and folders\n (3)",
+      "placeholder": null,
+      "ariaLabel": "Files and folders",
+      "id": null,
+      "class": "datatableheader g-box-sizing_border-box paged-table__header g-override",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTableHeader",
+        "headerLabel": "Files and folders"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": "Create",
+      "id": null,
+      "class": "rio-focus rio-focus--inset_0 rio-focus--border-radius_4px rio-focus--has_element-focus-visible rio-bare-button g-reset-element rio-bare-button--is_interactive rio-bare-button--rio_interactive-softest rio-bare-button--is_parent rio-bare-button--is_clickable rio-bare-button--size_14px rio-bare-button--is_square rio-bare-button--square_26x26 action-bar__item action-bar__item--is_menu datatableheader__action g-override",
+      "visible": true,
+      "name": "createOptions",
+      "dataset": {
+        "inputStatus": "INTERACTIVE"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": "Upload files…",
+      "id": null,
+      "class": "rio-focus rio-focus--inset_0 rio-focus--border-radius_4px rio-focus--has_element-focus-visible rio-bare-button g-reset-element rio-bare-button--is_interactive rio-bare-button--rio_interactive-softest rio-bare-button--is_parent rio-bare-button--is_clickable rio-bare-button--size_14px rio-bare-button--is_square rio-bare-button--square_26x26 action-bar__item action-bar__item--is_action datatableheader__action g-override",
+      "visible": true,
+      "name": "uploadFile",
+      "dataset": {
+        "buttonLoading": "false",
+        "buttonWorking": "false",
+        "buttonReady": "true",
+        "inputStatus": "INTERACTIVE"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": "Delete checked items…",
+      "id": null,
+      "class": "rio-focus rio-focus--inset_0 rio-focus--border-radius_4px rio-focus--has_element-focus-visible rio-bare-button g-reset-element rio-bare-button--is_interactive rio-bare-button--rio_interactive-softest rio-bare-button--is_parent rio-bare-button--is_clickable rio-bare-button--size_14px rio-bare-button--is_square rio-bare-button--square_26x26 action-bar__item action-bar__item--is_action datatableheader__action g-override",
+      "visible": true,
+      "name": "delete",
+      "dataset": {
+        "buttonLoading": "false",
+        "buttonWorking": "false",
+        "buttonReady": "true",
+        "inputStatus": "INTERACTIVE"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": "Refresh",
+      "id": null,
+      "class": "rio-focus rio-focus--inset_0 rio-focus--border-radius_4px rio-focus--has_element-focus-visible rio-bare-button g-reset-element rio-bare-button--is_interactive rio-bare-button--rio_interactive-softest rio-bare-button--is_parent rio-bare-button--is_clickable rio-bare-button--size_14px rio-bare-button--is_square rio-bare-button--square_26x26 action-bar__item action-bar__item--is_action datatableheader__action g-override",
+      "visible": true,
+      "name": "table-refresh",
+      "dataset": {
+        "buttonLoading": "false",
+        "buttonWorking": "false",
+        "buttonReady": "true",
+        "inputStatus": "INTERACTIVE"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": "Show",
+      "id": null,
+      "class": "rio-focus rio-focus--inset_0 rio-focus--border-radius_4px rio-focus--has_element-focus-visible rio-bare-button g-reset-element rio-bare-button--is_interactive rio-bare-button--rio_interactive-softest rio-bare-button--is_parent rio-bare-button--is_clickable rio-bare-button--size_14px rio-bare-button--is_square rio-bare-button--square_26x26 action-bar__item action-bar__item--is_menu datatableheader__action g-override",
+      "visible": true,
+      "name": "datatableheader-filter",
+      "dataset": {
+        "inputStatus": "INTERACTIVE"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": "Customize columns",
+      "id": null,
+      "class": "rio-focus rio-focus--inset_0 rio-focus--border-radius_4px rio-focus--has_element-focus-visible rio-bare-button g-reset-element rio-bare-button--is_interactive rio-bare-button--rio_interactive-softest rio-bare-button--is_parent rio-bare-button--is_clickable rio-bare-button--size_14px rio-bare-button--is_square rio-bare-button--square_26x26 action-bar__item action-bar__item--is_menu datatableheader__action g-override",
+      "visible": true,
+      "name": "datatableheader-fieldfilter",
+      "dataset": {
+        "inputStatus": "INTERACTIVE"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Type\nName\nFolder path\nStatus\nPlatform\nSize\nLast mo",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable g-box-sizing_border-box datatable--with-actions g-margin-block-end-not-last-child_8px datatable--theme-default",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable",
+        "pending": "false",
+        "hasActions": "true",
+        "isEmpty": "false"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "checkbox-input g-box-sizing_border-box g-reset-element checkbox-input--is_interactive",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "CheckboxInput",
+        "name": "",
+        "inputStatus": "INTERACTIVE",
+        "value": "false"
+      }
+    },
+    {
+      "tag": "INPUT",
+      "type": "checkbox",
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": "Select all",
+      "id": null,
+      "class": "checkbox-input__input",
+      "visible": true,
+      "name": null,
+      "dataset": {}
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Type",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable-column datatable-column--data datatable-column--active datatable-column--sorting datatable-column--clickable datatable-column--draggable datatable-column--align-left",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable.headerColumn",
+        "columnId": "type"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Name",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable-column datatable-column--data datatable-column--active datatable-column--sorting datatable-column--clickable datatable-column--draggable datatable-column--align-left",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable.headerColumn",
+        "columnId": "name"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Folder path",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable-column datatable-column--data datatable-column--draggable datatable-column--align-left",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable.headerColumn",
+        "columnId": "path"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Status",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable-column datatable-column--data datatable-column--clickable datatable-column--draggable datatable-column--align-left",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable.headerColumn",
+        "columnId": "botStatus"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Platform",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable-column datatable-column--data datatable-column--draggable datatable-column--align-left",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable.headerColumn",
+        "columnId": "tags@intendedPlatform"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Size",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable-column datatable-column--data datatable-column--draggable datatable-column--align-left",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable.headerColumn",
+        "columnId": "size"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Last modified",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable-column datatable-column--data datatable-column--clickable datatable-column--draggable datatable-column--align-left",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable.headerColumn",
+        "columnId": "lastModified"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Modified by",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable-column datatable-column--data datatable-column--draggable datatable-column--align-left",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable.headerColumn",
+        "columnId": "lastModifiedBy"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Folder\nDocument Workspace Processes\nBots\nN/A\nN/A\nN",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable-row g-box-sizing_content-box",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable.row",
+        "rowId": "32996148"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "checkbox-input g-box-sizing_border-box g-reset-element checkbox-input--is_interactive",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "CheckboxInput",
+        "name": "",
+        "inputStatus": "INTERACTIVE",
+        "value": "false"
+      }
+    },
+    {
+      "tag": "INPUT",
+      "type": "checkbox",
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": "Select row",
+      "id": null,
+      "class": "checkbox-input__input",
+      "visible": true,
+      "name": null,
+      "dataset": {}
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Folder",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable-column datatable-column--data datatable-column--align-left",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable.rowColumn",
+        "rowId": "32996148",
+        "columnId": "type"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Document Workspace Processes",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable-column datatable-column--data datatable-column--align-left",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable.rowColumn",
+        "rowId": "32996148",
+        "columnId": "name"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Bots",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable-column datatable-column--data datatable-column--align-left",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable.rowColumn",
+        "rowId": "32996148",
+        "columnId": "path",
+        "cellValue": "Bots"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "N/A",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable-column datatable-column--data datatable-column--align-left",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable.rowColumn",
+        "rowId": "32996148",
+        "columnId": "botStatus",
+        "cellValue": "N/A"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "N/A",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable-column datatable-column--data datatable-column--align-left",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable.rowColumn",
+        "rowId": "32996148",
+        "columnId": "tags@intendedPlatform",
+        "cellValue": "N/A"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "N/A",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable-column datatable-column--data datatable-column--align-left",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable.rowColumn",
+        "rowId": "32996148",
+        "columnId": "size",
+        "cellValue": "N/A"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "5 hours ago",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable-column datatable-column--data datatable-column--align-left",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable.rowColumn",
+        "rowId": "32996148",
+        "columnId": "lastModified"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "BC\nbinduchandanamnaidu@gmail.com",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable-column datatable-column--data datatable-column--align-left",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable.rowColumn",
+        "rowId": "32996148",
+        "columnId": "lastModifiedBy"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "BC\nbinduchandanamnaidu@gmail.com",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "user user--column",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "User",
+        "loading": "false",
+        "username": "binduchandanamnaidu@gmail.com"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": "Actions",
+      "id": null,
+      "class": "datatable-actions-button g-reset-element g-focus",
+      "visible": true,
+      "name": null,
+      "dataset": {}
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Folder\nSample bots\nBots\nN/A\nN/A\nN/A\n5 hours ago\nBC",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable-row g-box-sizing_content-box",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable.row",
+        "rowId": "32996147"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "checkbox-input g-box-sizing_border-box g-reset-element checkbox-input--is_interactive",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "CheckboxInput",
+        "name": "",
+        "inputStatus": "INTERACTIVE",
+        "value": "false"
+      }
+    },
+    {
+      "tag": "INPUT",
+      "type": "checkbox",
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": "Select row",
+      "id": null,
+      "class": "checkbox-input__input",
+      "visible": true,
+      "name": null,
+      "dataset": {}
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Folder",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable-column datatable-column--data datatable-column--align-left",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable.rowColumn",
+        "rowId": "32996147",
+        "columnId": "type"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Sample bots",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable-column datatable-column--data datatable-column--align-left",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable.rowColumn",
+        "rowId": "32996147",
+        "columnId": "name"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Bots",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable-column datatable-column--data datatable-column--align-left",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable.rowColumn",
+        "rowId": "32996147",
+        "columnId": "path",
+        "cellValue": "Bots"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "N/A",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable-column datatable-column--data datatable-column--align-left",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable.rowColumn",
+        "rowId": "32996147",
+        "columnId": "botStatus",
+        "cellValue": "N/A"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "N/A",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable-column datatable-column--data datatable-column--align-left",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable.rowColumn",
+        "rowId": "32996147",
+        "columnId": "tags@intendedPlatform",
+        "cellValue": "N/A"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "N/A",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable-column datatable-column--data datatable-column--align-left",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable.rowColumn",
+        "rowId": "32996147",
+        "columnId": "size",
+        "cellValue": "N/A"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "5 hours ago",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable-column datatable-column--data datatable-column--align-left",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable.rowColumn",
+        "rowId": "32996147",
+        "columnId": "lastModified"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "BC\nbinduchandanamnaidu@gmail.com",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable-column datatable-column--data datatable-column--align-left",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable.rowColumn",
+        "rowId": "32996147",
+        "columnId": "lastModifiedBy"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "BC\nbinduchandanamnaidu@gmail.com",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "user user--column",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "User",
+        "loading": "false",
+        "username": "binduchandanamnaidu@gmail.com"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": "Actions",
+      "id": null,
+      "class": "datatable-actions-button g-reset-element g-focus",
+      "visible": true,
+      "name": null,
+      "dataset": {}
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Form\nhello_manul_form_creation_without_automatatio",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable-row g-box-sizing_content-box",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable.row",
+        "rowId": "32996149"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "checkbox-input g-box-sizing_border-box g-reset-element checkbox-input--is_interactive",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "CheckboxInput",
+        "name": "",
+        "inputStatus": "INTERACTIVE",
+        "value": "false"
+      }
+    },
+    {
+      "tag": "INPUT",
+      "type": "checkbox",
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": "Select row",
+      "id": null,
+      "class": "checkbox-input__input",
+      "visible": true,
+      "name": null,
+      "dataset": {}
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Form",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable-column datatable-column--data datatable-column--align-left",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable.rowColumn",
+        "rowId": "32996149",
+        "columnId": "type"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "hello_manul_form_creation_without_automatation",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable-column datatable-column--data datatable-column--align-left",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable.rowColumn",
+        "rowId": "32996149",
+        "columnId": "name"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Bots",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable-column datatable-column--data datatable-column--align-left",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable.rowColumn",
+        "rowId": "32996149",
+        "columnId": "path",
+        "cellValue": "Bots"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "New",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable-column datatable-column--data datatable-column--align-left",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable.rowColumn",
+        "rowId": "32996149",
+        "columnId": "botStatus",
+        "cellValue": "New"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "N/A",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable-column datatable-column--data datatable-column--align-left",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable.rowColumn",
+        "rowId": "32996149",
+        "columnId": "tags@intendedPlatform",
+        "cellValue": "N/A"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "465 Bytes",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable-column datatable-column--data datatable-column--align-left",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable.rowColumn",
+        "rowId": "32996149",
+        "columnId": "size",
+        "cellValue": "465 Bytes"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "5 hours ago",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable-column datatable-column--data datatable-column--align-left",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable.rowColumn",
+        "rowId": "32996149",
+        "columnId": "lastModified"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "BC\nbinduchandanamnaidu@gmail.com",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "datatable-column datatable-column--data datatable-column--align-left",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "DataTable.rowColumn",
+        "rowId": "32996149",
+        "columnId": "lastModifiedBy"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "BC\nbinduchandanamnaidu@gmail.com",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "user user--column",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "User",
+        "loading": "false",
+        "username": "binduchandanamnaidu@gmail.com"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": "Actions",
+      "id": null,
+      "class": "datatable-actions-button g-reset-element g-focus",
+      "visible": true,
+      "name": null,
+      "dataset": {}
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "100",
+      "placeholder": null,
+      "ariaLabel": "per page",
+      "id": null,
+      "class": "rio-select-input g-box-sizing_border-box rio-select-input--mode_single rio-select-input--is_interactive rio-select-input--multi-line-mode_single rio-select-input--overflow_hidden rio-select-input--option-flow-direction_column",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "RioSelectInput",
+        "name": "",
+        "inputStatus": "INTERACTIVE",
+        "value": "100",
+        "expanded": "false"
+      }
+    },
+    {
+      "tag": "INPUT",
+      "type": "text",
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": "Keyboard focus boundary",
+      "id": null,
+      "class": "g-hide-element",
+      "visible": true,
+      "name": null,
+      "dataset": {}
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "100",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-focus rio-focus--inset_1px rio-focus--border-radius_2px rio-select-input-query rio-select-input-query--overflow_hidden",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "RioSelectInputQuery"
+      }
+    },
+    {
+      "tag": "INPUT",
+      "type": "text",
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-select-input-query__input rio-select-input-query__input--no_placeholder",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "RioSelectInputQuery.search-input"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-focus rio-focus--inset_0 rio-focus--border-radius_4px rio-focus--has_element-focus-visible rio-bare-button g-reset-element rio-bare-button--is_interactive rio-bare-button--rio_interactive-softest rio-bare-button--is_parent rio-bare-button--is_clickable rio-bare-button--size_12px rio-bare-button--is_square rio-bare-button--square_22x22",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "RioSelectInputQuery.toggle-button",
+        "inputStatus": "INTERACTIVE"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Refresh folders",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": ":rm:",
+      "class": "poppy poppy--has_arrow poppy--is_tooltip use-tooltip-poppy css-custom-properties--2",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "Poppy"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Refresh folders",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "poppy__content",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "Poppy.content"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Refresh folders",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "use-tooltip-poppy__content",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "useTooltip.content",
+        "isWarning": "false",
+        "isError": "false",
+        "isDisabled": "false"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Create",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": ":rp:",
+      "class": "poppy poppy--has_arrow poppy--is_tooltip use-tooltip-poppy css-custom-properties--2",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "Poppy"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Create",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "poppy__content",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "Poppy.content"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Create",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "use-tooltip-poppy__content",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "useTooltip.content",
+        "isWarning": "false",
+        "isError": "false",
+        "isDisabled": "false"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Upload files…",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": ":rq:",
+      "class": "poppy poppy--has_arrow poppy--is_tooltip use-tooltip-poppy css-custom-properties--2",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "Poppy"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Upload files…",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "poppy__content",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "Poppy.content"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Upload files…",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "use-tooltip-poppy__content",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "useTooltip.content",
+        "isWarning": "false",
+        "isError": "false",
+        "isDisabled": "false"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Delete checked items…",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": ":rr:",
+      "class": "poppy poppy--has_arrow poppy--is_tooltip use-tooltip-poppy css-custom-properties--2",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "Poppy"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Delete checked items…",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "poppy__content",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "Poppy.content"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Delete checked items…",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "use-tooltip-poppy__content",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "useTooltip.content",
+        "isWarning": "false",
+        "isError": "false",
+        "isDisabled": "false"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Refresh",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": ":rs:",
+      "class": "poppy poppy--has_arrow poppy--is_tooltip use-tooltip-poppy css-custom-properties--2",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "Poppy"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Refresh",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "poppy__content",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "Poppy.content"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Refresh",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "use-tooltip-poppy__content",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "useTooltip.content",
+        "isWarning": "false",
+        "isError": "false",
+        "isDisabled": "false"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Show",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": ":ru:",
+      "class": "poppy poppy--has_arrow poppy--is_tooltip use-tooltip-poppy css-custom-properties--2",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "Poppy"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Show",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "poppy__content",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "Poppy.content"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Show",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "use-tooltip-poppy__content",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "useTooltip.content",
+        "isWarning": "false",
+        "isError": "false",
+        "isDisabled": "false"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Customize columns",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": ":r10:",
+      "class": "poppy poppy--has_arrow poppy--is_tooltip use-tooltip-poppy css-custom-properties--2",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "Poppy"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Customize columns",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "poppy__content",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "Poppy.content"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Customize columns",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "use-tooltip-poppy__content",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "useTooltip.content",
+        "isWarning": "false",
+        "isError": "false",
+        "isDisabled": "false"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Create subfolder…",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": ":r11:",
+      "class": "poppy poppy--has_arrow poppy--is_tooltip use-tooltip-poppy css-custom-properties--2",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "Poppy"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Create subfolder…",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "poppy__content",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "Poppy.content"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Create subfolder…",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "use-tooltip-poppy__content",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "useTooltip.content",
+        "isWarning": "false",
+        "isError": "false",
+        "isDisabled": "false"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Process…\nTask Bot…\nAI Skill…\nForm…",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": ":r12:",
+      "class": "poppy poppy--is_interactive use-dropdown-poppy css-custom-properties--2",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "Poppy",
+        "poppyPosition": "BOTTOM",
+        "poppyParentid": "1"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Process…\nTask Bot…\nAI Skill…\nForm…",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "poppy__content g-scroller",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "Poppy.content",
+        "scroller": "true"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Process…\nTask Bot…\nAI Skill…\nForm…",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "use-dropdown-poppy__content g-scroller g-scroller--is_visible",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "useDropdown.content"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Process…\nTask Bot…\nAI Skill…\nForm…",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "dropdown g-box-sizing_border-box",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "Dropdown"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": "Process…",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-focus rio-focus--inset_4px rio-focus--border-radius_4px rio-focus--has_element-focus-visible dropdown-option g-reset-element g-box-sizing_border-box dropdown-option--clickable key-binding-parent-button",
+      "visible": true,
+      "name": "createProcess",
+      "dataset": {
+        "path": "Dropdown.Option",
+        "inputStatus": "INTERACTIVE"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": "Task Bot…",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-focus rio-focus--inset_4px rio-focus--border-radius_4px rio-focus--has_element-focus-visible dropdown-option g-reset-element g-box-sizing_border-box dropdown-option--clickable key-binding-parent-button",
+      "visible": true,
+      "name": "createTaskbot",
+      "dataset": {
+        "path": "Dropdown.Option",
+        "inputStatus": "INTERACTIVE"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": "AI Skill…",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-focus rio-focus--inset_4px rio-focus--border-radius_4px rio-focus--has_element-focus-visible dropdown-option g-reset-element g-box-sizing_border-box dropdown-option--clickable key-binding-parent-button",
+      "visible": true,
+      "name": "create-genaitools-prompttemplate",
+      "dataset": {
+        "path": "Dropdown.Option",
+        "inputStatus": "INTERACTIVE"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": "Form…",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-focus rio-focus--inset_4px rio-focus--border-radius_4px rio-focus--has_element-focus-visible dropdown-option g-reset-element g-box-sizing_border-box dropdown-option--clickable key-binding-parent-button",
+      "visible": true,
+      "name": "create-attended-form",
+      "dataset": {
+        "path": "Dropdown.Option",
+        "inputStatus": "INTERACTIVE"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Select all",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": ":r1d:",
+      "class": "poppy poppy--has_arrow poppy--is_tooltip css-custom-properties--2",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "Poppy"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Select all",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "poppy__content",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "Poppy.content"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Create form\nCancel\nCreate & edit\nName\nMaximum = 50",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": null,
+      "visible": true,
+      "name": null,
+      "dataset": {}
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Create form\nCancel\nCreate & edit\nName\nMaximum = 50",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "modal-form g-reset-element g-box-sizing_border-box css-custom-properties--2",
+      "visible": false,
+      "name": null,
+      "dataset": {
+        "path": "ModalForm",
+        "modalId": "repository-action-file-create",
+        "modalLoading": "false",
+        "modalWorking": "false",
+        "modalReady": "true"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-header__primary-toolbar-container",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "RioHeader.toolbar"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-toolbar g-box-sizing_border-box rio-header__toolbar rio-toolbar--items-count_0 rio-toolbar--visible-items-count_0 rio-toolbar--hidden-items-count_0 rio-toolbar--position-items_end rio-toolbar--orientation_horizontal",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "RioToolbar"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-toolbar__items",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "RioToolbar.items"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-toolbar-dropdown-parent rio-toolbar-dropdown-parent--is_hidden",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "itemCount": "0",
+        "overflowVisible": "false",
+        "path": "RioToolbar.dropdown"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-badger g-reset-element",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "RioBadger"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-vr rio-header__dropdown-button-vr",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "RioVR"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-focus rio-focus--inset_0 rio-focus--border-radius_4px rio-focus--has_element-focus-visible rio-bare-button g-reset-element rio-bare-button--is_parent rio-bare-button--is_disabled rio-bare-button--size_14px rio-bare-button--is_square rio-bare-button--square_26x26",
+      "visible": true,
+      "name": "header-toolbar-dropdown",
+      "dataset": {
+        "testid": "renderMeatballsDropdownButton",
+        "inputStatus": "DISABLED"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Cancel\nCreate & edit",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-header__static-content",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "RioHeader.static-buttons"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Cancel",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "command-button g-box-sizing_border-box command-button--has_outline",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "CommandButton"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": "Cancel",
+      "placeholder": null,
+      "ariaLabel": "Cancel",
+      "id": null,
+      "class": "rio-focus rio-focus--inset_negative-2px rio-focus--border-radius_4px rio-focus--has_element-focus-visible command-button__button command-button__button--primary g-reset-element command-button__button--is_clickable command-button__button--has_outline",
+      "visible": true,
+      "name": "cancel",
+      "dataset": {
+        "inputStatus": "INTERACTIVE"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Create & edit",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "command-button g-box-sizing_border-box command-button--is_solid",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "CommandButton"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": "Create & edit",
+      "placeholder": null,
+      "ariaLabel": "Create & edit",
+      "id": null,
+      "class": "rio-focus rio-focus--inset_negative-2px rio-focus--border-radius_4px rio-focus--has_element-focus-visible command-button__button command-button__button--primary g-reset-element command-button__button--is_clickable command-button__button--is_solid",
+      "visible": true,
+      "name": "submit",
+      "dataset": {
+        "inputStatus": "INTERACTIVE"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Name\nMaximum = 50 characters\nDescription (optional",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "modal-form__content-body g-scroller",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "ModalForm.body",
+        "scroller": "true"
+      }
+    },
+    {
+      "tag": "INPUT",
+      "type": "text",
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "form-hidden",
+      "visible": false,
+      "name": "_auto_complete_",
+      "dataset": {}
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Name\nMaximum = 50 characters\nDescription (optional",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "loadable loadable--theme_light g-margin-block-end-not-last-child_8px",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "Loadable",
+        "loadableLoading": "false",
+        "loadableWorking": "false",
+        "loadableReady": "true"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Name\nMaximum = 50 characters",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "field-label g-reset-element g-box-sizing_border-box g-margin-block-end-not-last-child_8px",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "FieldLabel",
+        "name": "name",
+        "label": "Name",
+        "help": "Maximum = 50 characters",
+        "hasError": "false",
+        "hasWarning": "false"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-focus rio-focus--inset_1px rio-focus--border-radius_2px rio-focus--has_focus textinput g-box-sizing_border-box g-margin-block-end-not-last-child_8px",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "TextInput",
+        "name": "name",
+        "inputStatus": "INTERACTIVE",
+        "value": "Untitled"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "textinput-cell textinput-cell-input",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "TextInput.input-cell"
+      }
+    },
+    {
+      "tag": "INPUT",
+      "type": "text",
+      "text": null,
+      "placeholder": "Required",
+      "ariaLabel": null,
+      "id": ":r16:",
+      "class": "textinput-cell-input-control",
+      "visible": true,
+      "name": "name",
+      "dataset": {
+        "path": "TextInput.input"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Maximum = 50 characters",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": ":r17:",
+      "class": "field-label__help",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "FieldLabel.help"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Description (optional)\nMaximum = 255 characters",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "field-label g-reset-element g-box-sizing_border-box g-margin-block-end-not-last-child_8px",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "FieldLabel",
+        "name": "description",
+        "label": "Description (optional)",
+        "help": "Maximum = 255 characters",
+        "hasError": "false",
+        "hasWarning": "false"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-focus rio-focus--inset_1px rio-focus--border-radius_2px textinput g-box-sizing_border-box g-margin-block-end-not-last-child_8px",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "TextInput",
+        "name": "description",
+        "inputStatus": "INTERACTIVE",
+        "value": ""
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "textinput-cell textinput-cell-input",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "TextInput.input-cell"
+      }
+    },
+    {
+      "tag": "INPUT",
+      "type": "text",
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": ":r18:",
+      "class": "textinput-cell-input-control",
+      "visible": true,
+      "name": "description",
+      "dataset": {
+        "path": "TextInput.input"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Maximum = 255 characters",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": ":r19:",
+      "class": "field-label__help",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "FieldLabel.help"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Folder\nChoose…",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "field-label g-reset-element g-box-sizing_border-box g-margin-block-end-not-last-child_8px",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "FieldLabel",
+        "name": "parentId",
+        "label": "Folder",
+        "hasError": "false",
+        "hasWarning": "false"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Choose…",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "inline-content g-reset-element single-entity-input",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "SingleEntityInput"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "rio-focus rio-focus--inset_1px rio-focus--border-radius_2px textinput g-box-sizing_border-box textinput--static g-margin-block-end-not-last-child_8px",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "TextInput",
+        "name": "parentId.label",
+        "inputStatus": "READ_ONLY",
+        "value": "\\Bots"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "textinput-cell textinput-cell--before textinput-cell--align_start",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "TextInput.prefix-cell"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "textinput-cell-extra-content",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "TextInput.cell-content"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "textinput-cell textinput-cell-input",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "TextInput.input-cell"
+      }
+    },
+    {
+      "tag": "INPUT",
+      "type": "text",
+      "text": null,
+      "placeholder": "Required",
+      "ariaLabel": null,
+      "id": null,
+      "class": "textinput-cell-input-control",
+      "visible": true,
+      "name": "parentId.label",
+      "dataset": {
+        "path": "TextInput.input"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "textinput-cell textinput-cell--after textinput-cell--align_end",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "TextInput.suffix-cell"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "textinput-cell-extra-content",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "TextInput.cell-content"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "g-box-sizing_border-box action-bar action-bar--theme_default g-margin-block-end-not-last-child_4px",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "ActionBar"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": "Show details",
+      "id": null,
+      "class": "rio-focus rio-focus--inset_0 rio-focus--border-radius_4px rio-focus--has_element-focus-visible rio-bare-button g-reset-element rio-bare-button--is_interactive rio-bare-button--rio_interactive-softest rio-bare-button--is_parent rio-bare-button--is_clickable rio-bare-button--size_14px rio-bare-button--is_square rio-bare-button--square_26x26 action-bar__item action-bar__item--is_action",
+      "visible": true,
+      "name": "info",
+      "dataset": {
+        "buttonLoading": "false",
+        "buttonWorking": "false",
+        "buttonReady": "true",
+        "inputStatus": "INTERACTIVE"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Choose…",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "command-button g-box-sizing_border-box command-button--has_outline",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "CommandButton"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": "Choose…",
+      "placeholder": null,
+      "ariaLabel": "Choose…",
+      "id": null,
+      "class": "rio-focus rio-focus--inset_negative-2px rio-focus--border-radius_4px rio-focus--has_element-focus-visible command-button__button command-button__button--primary g-reset-element command-button__button--is_clickable command-button__button--has_outline",
+      "visible": true,
+      "name": "parentId.choose",
+      "dataset": {
+        "inputStatus": "INTERACTIVE"
+      }
+    },
+    {
+      "tag": "INPUT",
+      "type": "submit",
+      "text": null,
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "form-hidden",
+      "visible": false,
+      "name": null,
+      "dataset": {}
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Show details",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": ":r1f:",
+      "class": "poppy poppy--has_arrow poppy--is_tooltip use-tooltip-poppy css-custom-properties--2",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "Poppy"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Show details",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "poppy__content",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "Poppy.content"
+      }
+    },
+    {
+      "tag": "DIV",
+      "type": null,
+      "text": "Show details",
+      "placeholder": null,
+      "ariaLabel": null,
+      "id": null,
+      "class": "use-tooltip-poppy__content",
+      "visible": true,
+      "name": null,
+      "dataset": {
+        "path": "useTooltip.content",
+        "isWarning": "false",
+        "isError": "false",
+        "isDisabled": "false"
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "type": "button",
+      "text": "9",
+      "placeholder": null,
+      "ariaLabel": "Open Resource Center, 9 new notification",
+      "id": "_pendo-badge_BagloDwq0o85bPfIxJkbFOHKZyY",
+      "class": "_pendo-badge _pendo-resource-center-badge-container _pendo-badge_",
+      "visible": false,
+      "name": null,
+      "dataset": {
+        "pendoAriaLabelAlertSingular": "Open Resource Center, {UNSEEN_COUNT} new notification",
+        "pendoAriaLabelAlertPlural": "Open Resource Center, {UNSEEN_COUNT} new notification",
+        "layout": "badgeResourceCenter",
+        "pendoStashedAriaLabel": "Open Resource Center"
+      }
+    }
+  ]
+}
