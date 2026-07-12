@@ -84,9 +84,20 @@ class FormBuilderPage extends BasePage {
   async uploadFile(filePath) {
     const ctx = await this._getBuilderContext();
     const root = ctx.type === 'frame' ? ctx.frame : this.page;
+    const fileInput = root.locator('input[type="file"]').first();
+
+    if (await fileInput.count() > 0) {
+      await fileInput.setInputFiles(filePath);
+      await this.page.waitForTimeout(500);
+      return;
+    }
+
     let browseLink = root.locator('a.preview-label__browseText').first();
     if (await browseLink.count() === 0) {
       browseLink = root.getByText('browse', { exact: false }).first();
+    }
+    if (await browseLink.count() === 0) {
+      browseLink = root.locator('text=/browse/i').first();
     }
     if (await browseLink.count() === 0) {
       throw new Error('Browse link not found');
