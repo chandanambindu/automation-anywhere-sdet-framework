@@ -1,3 +1,82 @@
+# Automation Anywhere — Playwright Test Suite
+
+This repository contains end-to-end UI and API tests for Automation Anywhere using Playwright.
+
+Overview
+- Use Case 1 (UI): Create a Form via the web UI (login, Automation → Create → Form, add controls, upload file, save and verify).
+- Use Case 2 (API): Create a private workspace, create a form and a process via API, save content and dependencies.
+
+Setup
+
+1. Install Node.js (v18 recommended) and npm.
+2. Clone the repository and install dependencies:
+
+```bash
+git clone git@github.com:chandanambindu/automation-anywhere-sdet-framework.git
+cd automation-anywhere-sdet-framework
+npm ci
+npx playwright install --with-deps
+```
+
+Environment / Configuration
+- Create a local `.env` file (do not commit) with the following variables:
+
+- `BASE_URL` — UI base URL
+- `API_BASE_URL` — API base URL
+- `USERNAME` — test user email
+- `PASSWORD` — test user password
+- Optional timeouts and flags: `TEST_TIMEOUT_MS`, `EXPECT_TIMEOUT_MS`, `ACTION_TIMEOUT_MS`, `NAVIGATION_TIMEOUT_MS`, `RETRIES`, `BROWSER`, `HEADLESS`
+
+Example `.env` (local only):
+
+```
+API_BASE_URL=https://community.cloud.automationanywhere.digital
+BASE_URL=https://www.automationanywhere.com/products/enterprise/community-edition
+USERNAME=you@example.com
+PASSWORD=supersecret
+HEADLESS=true
+```
+
+CI Notes
+- GitHub Actions workflow is present at `.github/workflows/playwright.yml` and uses repository secrets: `BASE_URL`, `API_BASE_URL`, `USERNAME`, `PASSWORD`.
+
+Running tests locally
+- Run the full suite:
+
+```bash
+npm test
+```
+
+- Run UI tests only:
+
+```bash
+npm run test:ui
+```
+
+- Run API tests only:
+
+```bash
+npm run test:api
+```
+
+Test organization & naming
+- Tests are organized under `tests/ui/` and `tests/api/` and labeled with `Use Case` prefixes in `describe` and test titles. This makes it clear which use case each test exercises.
+
+Frameworks & tools
+- Playwright Test (`@playwright/test`) for browser automation and API test orchestration.
+- Node.js (CommonJS) as the runtime.
+- `dotenv` for local environment loading.
+
+Repository notes
+- Do not commit `.env` files containing credentials. Rotate credentials if they were committed previously.
+- Debug artifacts (e.g., `tmp-*.png`, `debug-*.js`) are ignored in `.gitignore`.
+
+Authorship
+- This repository was prepared as part of the Automation Anywhere SDET assignment. All changes and test artifacts live in the repo; run the tests using the commands above.
+
+If you want, I can:
+- Remove debug artifacts from history and the current tree.
+- Add `docs/TESTING.md` with step-by-step verification notes.
 # Automation Anywhere Playwright Framework
 
 This repository contains a production-oriented Playwright Test framework for the Automation Anywhere Community Edition assignment. The initial milestone focuses on a clean project skeleton, environment configuration, reporting, and CI wiring. Application-specific selectors and API endpoints will be added after inspecting the running application and network activity.

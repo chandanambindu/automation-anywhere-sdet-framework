@@ -19,8 +19,8 @@ function getAppBaseURL() {
 if (!USERNAME || !PASSWORD) {
   console.warn('Skipping create-form UI tests: credentials not provided');
 } else {
-  test.describe('Automation - Create Form', () => {
-    test('should create form, add controls, upload file and save', async ({ page, testData }) => {
+  test.describe('Use Case 1 - Automation - Create Form', () => {
+    test('Use Case 1: create form, add controls, upload file and save', async ({ page, testData }) => {
       test.setTimeout(180000);
       const loginPage = new LoginPage(page);
       const dashboard = new DashboardPage(page);

@@ -11,8 +11,8 @@ if (!USERNAME || !PASSWORD) {
   // This keeps CI and local runs stable when secrets are not configured.
   console.warn('Skipping UI login tests: credentials not provided');
 } else {
-  test.describe('Login Flow - UI', () => {
-    test('should login and display Automation navigation', async ({ page, logger }) => {
+  test.describe('Use Case 1 - Login Flow - UI', () => {
+    test('Use Case 1: should login and display Automation navigation', async ({ page, logger }) => {
       test.setTimeout(120000);
       const loginPage = new LoginPage(page);
       const dashboard = new DashboardPage(page);

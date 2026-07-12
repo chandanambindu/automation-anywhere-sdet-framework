@@ -18,7 +18,7 @@ if (!USERNAME || !PASSWORD) {
   console.warn('Skipping Use Case 2 API tests: credentials not provided');
 } else {
   test.describe('Use Case 2 - Create Process with a Form via API', () => {
-    test('full live flow: auth -> get bots folder -> create process/form -> save content -> save dependencies', async () => {
+    test('Use Case 2: full live flow - auth -> create workspace/form/process -> save content & dependencies', async () => {
       const authApi = new AuthApi();
       const workspaceApi = new WorkspaceApi();
       const formApi = new FormApi();
