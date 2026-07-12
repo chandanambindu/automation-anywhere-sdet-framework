@@ -61,6 +61,7 @@ class FormBuilderPage extends BasePage {
     await createBtn.click({ force: true }).catch(() => {});
 
     // Give the builder some extra time to initialize and expand palette if collapsed
+    await this.page.waitForLoadState('networkidle').catch(() => {});
     await this.page.waitForTimeout(2500);
 
     // Ensure palette is visible (try page and all frames)
@@ -72,21 +73,41 @@ class FormBuilderPage extends BasePage {
 
     // Wait for the builder palette to appear in any frame or page context.
     const start = Date.now();
-    const timeout = 45000;
+    const timeout = 90000;
     while (Date.now() - start < timeout) {
       try {
-        // Prefer a detected builder frame
+        // First, explicitly wait for the known builder iframe to be attached and seeded
+        try {
+          await this.page.waitForSelector('iframe.modulepage-frame', { timeout: 15000 });
+          const frameObj = this.page.frames().find(f => f.url().includes('/modules/attended') || f.url().includes('/file/form/') || f.url().includes('/file/form'));
+          if (frameObj) {
+            // Wait for palette items inside the frame
+            try {
+              await frameObj.waitForSelector('button:has-text("Text Box"), button:has-text("Select File"), div.editor-palette-item, div[class*="palette"], button:has-text("Textbox")', { timeout: 30000 });
+              return;
+            } catch (e) {
+              // if the frame exists but palette not ready, continue to broader detection
+            }
+          }
+        } catch (e) {
+          // iframe not present yet; continue to broader detection below
+        }
+
+        // Prefer a detected builder frame via scanning
         const ctx = await this._getBuilderContext();
-        const builderControl = this._ctxLocator(ctx, 'button:has-text("Text Box"), button:has-text("Select File"), div.editor-palette-item, div.editor-palette-item__child--is_draggable').first();
+        const builderControl = this._ctxLocator(ctx, 'button:has-text("Text Box"), button:has-text("Select File"), button:has-text("TextBox"), button:has-text("Textbox"), text=Text, div.editor-palette-item, div[class*="palette"]').first();
         if (await builderControl.count() > 0) {
           await builderControl.waitFor({ state: 'visible', timeout: 5000 }).catch(() => {});
           return;
         }
 
+        // Attempt to toggle palette if a toggle exists in this context
+        try { await this._ensurePaletteVisible(); } catch (e) {}
+
         // As an extra fallback, try to find palette controls by scanning each frame directly
         for (const f of this.page.frames()) {
           try {
-            const fc = await f.locator('button:has-text("Text Box"), button:has-text("Select File"), div.editor-palette-item').first();
+            const fc = await f.locator('button:has-text("Text Box"), button:has-text("Select File"), button:has-text("TextBox"), text=Text, div.editor-palette-item, div[class*="palette"]').first();
             if (fc && await fc.count() > 0) {
               await fc.waitFor({ state: 'visible', timeout: 3000 }).catch(() => {});
               return;
