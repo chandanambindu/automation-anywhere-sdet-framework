@@ -3,13 +3,13 @@ const env = require('../config/env');
 
 class ProcessApi extends BaseApiClient {
   constructor() {
-    super(process.env.API_BASE_URL || env.baseURL, {
+    super(process.env.API_BASE_URL || env.apiBaseURL || env.baseURL, {
       Accept: 'application/json',
     });
   }
 
   authHeaders(token) {
-    return token ? { Authorization: `Bearer ${token}` } : {};
+    return token ? { 'X-Authorization': token } : {};
   }
 
   async listProcesses(token, query) {
@@ -26,9 +26,27 @@ class ProcessApi extends BaseApiClient {
   }
 
   async createProcess(processPayload, token) {
-    return this.post('/processes', {
+    return this.post('/v2/repository/files', {
       headers: this.authHeaders(token),
       body: processPayload,
+    });
+  }
+
+  async saveProcessContent(processId, processBody, token) {
+    return this.put(`/v2/repository/files/${processId}/content`, {
+      headers: {
+        ...this.authHeaders(token),
+        'Content-Type': 'application/vnd.aa.workflow',
+      },
+      query: { hasErrors: false },
+      body: processBody,
+    });
+  }
+
+  async saveDependencies(fileId, childFileIds, token) {
+    return this.put(`/v2/repository/files/${fileId}/dependencies`, {
+      headers: this.authHeaders(token),
+      body: { childFileIds },
     });
   }
 

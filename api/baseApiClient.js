@@ -2,7 +2,7 @@ const env = require('../config/env');
 
 class BaseApiClient {
   constructor(baseURL, defaultHeaders = {}) {
-    this.baseURL = baseURL || env.baseURL;
+    this.baseURL = baseURL || env.apiBaseURL || env.baseURL;
     this.defaultHeaders = {
       'Content-Type': 'application/json',
       Accept: 'application/json',

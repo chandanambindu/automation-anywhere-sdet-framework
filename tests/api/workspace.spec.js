@@ -5,12 +5,13 @@ const env = require('../../config/env');
 
 const USERNAME = process.env.USERNAME || env.username;
 const PASSWORD = process.env.PASSWORD || env.password;
+const BOTS_FOLDER_ID = process.env.BOTS_FOLDER_ID || env.botsFolderId || '32996145';
 
 if (!USERNAME || !PASSWORD) {
   console.warn('Skipping API workspace tests: credentials not provided');
 } else {
   test.describe('API Workspace', () => {
-    test('should authenticate and list workspaces', async () => {
+    test('should authenticate and read the Bots repository folder', async () => {
       const authApi = new AuthApi();
       const workspaceApi = new WorkspaceApi();
 
@@ -21,10 +22,12 @@ if (!USERNAME || !PASSWORD) {
 
       expect(token).toBeTruthy();
 
-      const workspaceResponse = await workspaceApi.listWorkspaces(token);
-      expect(workspaceResponse.ok).toBeTruthy();
-      const workspaceBody = await workspaceResponse.json();
-      expect(workspaceBody).toBeTruthy();
+      const folderResponse = await workspaceApi.getRepositoryFolder(BOTS_FOLDER_ID, token);
+      expect(folderResponse.ok).toBeTruthy();
+      const folderBody = await folderResponse.json();
+      expect(folderBody).toBeTruthy();
+      expect(folderBody.id).toBe(String(BOTS_FOLDER_ID));
+      expect(folderBody.name).toMatch(/Bots/i);
     });
   });
 }

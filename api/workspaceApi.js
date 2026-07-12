@@ -3,17 +3,29 @@ const env = require('../config/env');
 
 class WorkspaceApi extends BaseApiClient {
   constructor() {
-    super(process.env.API_BASE_URL || env.baseURL, {
+    super(process.env.API_BASE_URL || env.apiBaseURL || env.baseURL, {
       Accept: 'application/json',
     });
   }
 
   authHeaders(token) {
-    return token ? { Authorization: `Bearer ${token}` } : {};
+    return token ? { 'X-Authorization': token } : {};
   }
 
   async listWorkspaces(token) {
     return this.get('/workspaces', {
+      headers: this.authHeaders(token),
+    });
+  }
+
+  async getWorkspaceDefaults(token) {
+    return this.get('/v2/repository/workspace/defaults', {
+      headers: this.authHeaders(token),
+    });
+  }
+
+  async getRepositoryFolder(folderId, token) {
+    return this.get(`/v2/repository/folders/${folderId}`, {
       headers: this.authHeaders(token),
     });
   }

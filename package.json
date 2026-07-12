@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npx playwright test",
     "test:ui": "npx playwright test tests/ui",
-    "test:api": "npx playwright test tests/api",
+    "test:api": "npx playwright test tests/api --project=chromium --workers=1",
     "report": "npx playwright show-report reports/html",
     "start:mock": "node test-mock/server.js",
     "collect-artifacts": "node scripts/collectArtifacts.js",

@@ -3,14 +3,14 @@ const env = require('../config/env');
 
 class AuthApi extends BaseApiClient {
   constructor() {
-    super(process.env.API_BASE_URL || env.baseURL, {
+    super(process.env.API_BASE_URL || env.apiBaseURL || env.baseURL, {
       Accept: 'application/json',
     });
   }
 
   async login(username, password) {
-    return this.post('/auth/login', {
-      body: { username, password },
+    return this.post('/v2/authentication', {
+      body: { username, password, captcha: {} },
     });
   }
 
@@ -27,7 +27,7 @@ class AuthApi extends BaseApiClient {
   }
 
   authHeaders(token) {
-    return token ? { Authorization: `Bearer ${token}` } : {};
+    return token ? { 'X-Authorization': token } : {};
   }
 }
 
