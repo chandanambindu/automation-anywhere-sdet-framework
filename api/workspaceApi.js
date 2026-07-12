@@ -9,7 +9,7 @@ class WorkspaceApi extends BaseApiClient {
   }
 
   authHeaders(token) {
-    return token ? { 'X-Authorization': token } : {};
+    return token ? { 'X-Authorization': token, Authorization: `Bearer ${token}` } : {};
   }
 
   async listWorkspaces(token) {
