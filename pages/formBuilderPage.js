@@ -8,15 +8,44 @@ class FormBuilderPage extends BasePage {
     this.page = page;
   }
 
+  async _findBuilderFrame() {
+    const frames = this.page.frames();
+    const nestedBuilder = frames.find((f) => {
+      const url = f.url();
+      return (
+        f.parentFrame() &&
+        (url.includes('/modules/attended/#/file/form/') ||
+          (url.includes('/file/form/') && url.includes('/modules/attended/')) ||
+          (url.includes('/file/form/') && url.includes('/edit')))
+      );
+    });
+    if (nestedBuilder) {
+      return nestedBuilder;
+    }
+
+    return frames.find((f) => {
+      const url = f.url();
+      return (
+        url.includes('/modules/attended/#/file/form/') ||
+        url.includes('/file/form/') ||
+        url.includes('form/edit') ||
+        url.includes('module/attended')
+      );
+    });
+  }
+
   async _getBuilderContext() {
     await this.page.waitForLoadState('domcontentloaded').catch(() => {});
+
+    const frameObj = await this._findBuilderFrame();
+    if (frameObj) {
+      return { type: 'frame', frame: frameObj };
+    }
+
     // Prefer the iframe.modulepage-frame when available
     try {
       const iframeHandle = this.page.locator('iframe.modulepage-frame').first();
       if (await iframeHandle.count().catch(() => 0)) {
-        // Use the frame object if possible so we can run locators directly against it
-        const frameObj = this.page.frames().find(f => f.url().includes('module/attended') || f.url().includes('/file/form/') || f.url().includes('form/edit'));
-        if (frameObj) return { type: 'frame', frame: frameObj };
         return { type: 'frame', frame: this.page.frameLocator('iframe.modulepage-frame').first() };
       }
     } catch (e) {}
@@ -25,7 +54,7 @@ class FormBuilderPage extends BasePage {
     for (const f of this.page.frames()) {
       try {
         const hasPalette = await f.locator('button:has-text("Text Box"), button:has-text("Select File"), div.editor-palette-item, div.editor-palette-item__child--is_draggable').count().catch(() => 0);
-        const hasCanvas = await f.locator('div.formcanvas__leftpane, div.formcanvas-content, div.editor-layout__canvas, div.formbuilder-formcanvas, div.formcanvas-container').count().catch(() => 0);
+        const hasCanvas = await f.locator('div.formcanvas__leftpane, div.formcanvas-content, div.editor-layout__canvas, div.formbuilder-formcanvas, div.formcanvas-container, div[class*="canvas"], div[class*="builder"]').count().catch(() => 0);
         const hasProps = await f.locator('div.property-pane, div.editor-details').count().catch(() => 0);
         if (hasPalette && hasCanvas) {
           return { type: 'frame', frame: f };
@@ -60,68 +89,43 @@ class FormBuilderPage extends BasePage {
     await createBtn.waitFor({ state: 'visible', timeout: 15000 });
     await createBtn.click({ force: true }).catch(() => {});
 
-    // Give the builder some extra time to initialize and expand palette if collapsed
+    // Give the builder some extra time to initialize
     await this.page.waitForLoadState('networkidle').catch(() => {});
     await this.page.waitForTimeout(2500);
 
-    // Ensure palette is visible (try page and all frames)
+    // Try expanding palette if collapsed, but do not require it here
     try {
       await this._ensurePaletteVisible();
     } catch (e) {
-      // ignore; we'll rely on later scanning
+      // ignore; builder may still be available later
     }
+  }
 
-    // Wait for the builder palette to appear in any frame or page context.
+  async waitForBuilderReady(timeout = 60000) {
     const start = Date.now();
-    const timeout = 90000;
     while (Date.now() - start < timeout) {
       try {
-        // First, explicitly wait for the known builder iframe to be attached and seeded
-        try {
-          await this.page.waitForSelector('iframe.modulepage-frame', { timeout: 15000 });
-          const frameObj = this.page.frames().find(f => f.url().includes('/modules/attended') || f.url().includes('/file/form/') || f.url().includes('/file/form'));
-          if (frameObj) {
-            // Wait for palette items inside the frame
-            try {
-              await frameObj.waitForSelector('button:has-text("Text Box"), button:has-text("Select File"), div.editor-palette-item, div[class*="palette"], button:has-text("Textbox")', { timeout: 30000 });
-              return;
-            } catch (e) {
-              // if the frame exists but palette not ready, continue to broader detection
-            }
+        const frameObj = await this._findBuilderFrame();
+        if (frameObj) {
+          const control = frameObj.locator('button:has-text("Text Box"), button:has-text("Select File"), button:has-text("TextBox"), button:has-text("Textbox"), div.editor-palette-item').first();
+          if (await control.count() > 0) {
+            await control.waitFor({ state: 'visible', timeout: 5000 }).catch(() => {});
+            return;
           }
-        } catch (e) {
-          // iframe not present yet; continue to broader detection below
         }
 
-        // Prefer a detected builder frame via scanning
         const ctx = await this._getBuilderContext();
-        const builderControl = this._ctxLocator(ctx, 'button:has-text("Text Box"), button:has-text("Select File"), button:has-text("TextBox"), button:has-text("Textbox"), text=Text, div.editor-palette-item, div[class*="palette"]').first();
-        if (await builderControl.count() > 0) {
-          await builderControl.waitFor({ state: 'visible', timeout: 5000 }).catch(() => {});
+        const control = this._ctxLocator(ctx, 'button:has-text("Text Box"), button:has-text("Select File"), button:has-text("TextBox"), button:has-text("Textbox"), div.editor-palette-item').first();
+        if (await control.count() > 0) {
+          await control.waitFor({ state: 'visible', timeout: 5000 }).catch(() => {});
           return;
-        }
-
-        // Attempt to toggle palette if a toggle exists in this context
-        try { await this._ensurePaletteVisible(); } catch (e) {}
-
-        // As an extra fallback, try to find palette controls by scanning each frame directly
-        for (const f of this.page.frames()) {
-          try {
-            const fc = await f.locator('button:has-text("Text Box"), button:has-text("Select File"), button:has-text("TextBox"), text=Text, div.editor-palette-item, div[class*="palette"]').first();
-            if (fc && await fc.count() > 0) {
-              await fc.waitFor({ state: 'visible', timeout: 3000 }).catch(() => {});
-              return;
-            }
-          } catch (e) {
-            // ignore
-          }
         }
       } catch (e) {
         // ignore and retry
       }
-      await this.page.waitForTimeout(500);
+      await this.page.waitForTimeout(1000);
     }
-    throw new Error('Timed out waiting for form builder palette to appear');
+    throw new Error('Timed out waiting for form builder to become ready');
   }
 
   // Try to click a palette toggle if present in the page or in any frame
@@ -154,6 +158,9 @@ class FormBuilderPage extends BasePage {
       'div.formcanvas-content',
       'div.editor-layout__canvas',
       'div.formcanvas-container',
+      'div[class*="canvas" i]',
+      'div[class*="builder" i]',
+      'div[class*="drop" i]',
     ];
     for (const selector of targets) {
       const locator = this._ctxLocator(ctx, selector).first();
