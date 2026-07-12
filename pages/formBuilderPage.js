@@ -299,9 +299,38 @@ class FormBuilderPage extends BasePage {
   async enterText(text) {
     const ctx = await this._getBuilderContext();
     const root = ctx.type === 'frame' ? ctx.frame : this.page;
-    const textInput = root.locator('div.property-pane input[type="text"], div.property-pane textarea, div.editor-details input[type="text"], div.editor-details textarea').first();
+    // Prefer editable inputs (not readonly/disabled). Search property panel for the first editable text input/textarea.
+    const editableSelector = 'div.property-pane input[type="text"]:not([readonly]):not([disabled]), div.property-pane textarea:not([readonly]):not([disabled]), div.editor-details input[type="text"]:not([readonly]):not([disabled]), div.editor-details textarea:not([readonly]):not([disabled])';
+    let textInput = root.locator(editableSelector).first();
+    if (await textInput.count() === 0) {
+      // Fallback: try to find inputs by common labels like 'Default value' or 'Element label'
+      const labelCandidates = ['Default value', 'Element label', 'Label', 'Value', 'Default'];
+      for (const lbl of labelCandidates) {
+        try {
+          const labelEl = root.locator(`text=${lbl}`).first();
+          if (await labelEl.count() > 0) {
+            // attempt to find the nearest input following the label
+            const candidate = labelEl.locator('xpath=following::input[1] | following::textarea[1]').first();
+            if (await candidate.count() > 0) { textInput = candidate; break; }
+          }
+        } catch (e) {}
+      }
+    }
+
     await textInput.waitFor({ state: 'visible', timeout: 30000 });
-    await textInput.fill(text);
+    // Ensure editable via JS if necessary
+    try {
+      await textInput.fill(text, { timeout: 10000 });
+    } catch (e) {
+      // Last resort: set value via DOM and dispatch input events
+      await root.evaluate((el, val) => {
+        try { el.removeAttribute('readonly'); } catch (e) {}
+        try { el.removeAttribute('disabled'); } catch (e) {}
+        el.value = val;
+        el.dispatchEvent(new Event('input', { bubbles: true }));
+        el.dispatchEvent(new Event('change', { bubbles: true }));
+      }, await textInput.elementHandle(), text);
+    }
   }
 
   async uploadFile(filePath) {

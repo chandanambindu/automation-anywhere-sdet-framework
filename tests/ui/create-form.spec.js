@@ -48,9 +48,13 @@ if (!USERNAME || !PASSWORD) {
       await formBuilder.dragTextBox();
       await formBuilder.dragSelectFile();
 
-      // Basic validation that the controls were added
+      // Basic validation that the controls were added and interact with properties
       await formBuilder.clickControlOnCanvas('Text Box');
       await formBuilder.verifyControlProperties('Text Box');
+      // Enter text into the Text Box control
+      await formBuilder.enterText('Sample input from automation');
+
+      // Verify Select File properties (upload is skipped)
       await formBuilder.clickControlOnCanvas('Select File');
       await formBuilder.verifyControlProperties('Select File');
     });
