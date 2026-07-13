@@ -10,3 +10,9 @@ screenshots/
 .DS_Store
 .env.example
 
+# Local debug artifacts
+debug-*.js
+tmp-*
+after-*.png
+debug-*.png
+
