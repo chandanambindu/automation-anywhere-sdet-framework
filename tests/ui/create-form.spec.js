@@ -59,6 +59,7 @@ if (!USERNAME || !PASSWORD) {
 
       // Validate the right-side properties panel for each control before continuing
       await formBuilder.clickControlOnCanvas('Text Box');
+      await page.waitForTimeout(1500); // Wait for panel to be ready after control selection
       expect(await formBuilder.verifyControlProperties('Text Box')).toBeTruthy();
       expect(await formBuilder.verifyTextBoxPropertiesPanel()).toBeTruthy();
       expect(await formBuilder.verifyRightPanelInteractions('Text Box', 'Automation Anywhere assignment')).toBeTruthy();
