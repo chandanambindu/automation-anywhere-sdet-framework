@@ -297,31 +297,38 @@ class FormBuilderPage extends BasePage {
     const timeout = 20000;
     while (Date.now() - start < timeout) {
       try {
-        for (const candidate of candidates) {
+        const fieldLabelSelectors = [
+          `div.field-label[data-label="${controlName}"]`,
+          `div.field-label[data-label="${controlName.replace(/\s+/g, '')}"]`,
+          `div.field-label[data-label*="${controlName}"]`,
+          `div.field-label:has-text("${controlName}")`,
+          `label:has-text("${controlName}")`,
+          `div.field-label:has-text("${controlName.replace(/\s+/g, '')}")`,
+          `label:has-text("${controlName.replace(/\s+/g, '')}")`,
+        ];
+
+        for (const candidate of [...fieldLabelSelectors, ...candidates]) {
           const element = canvas.locator(candidate).first();
           if (await element.count() > 0) {
             await element.waitFor({ state: 'visible', timeout: 5000 }).catch(() => {});
             try {
-              // prefer elementHandle click when available inside frames
               const handle = await element.elementHandle().catch(() => null);
               if (handle) {
                 try {
                   await handle.click({ force: true });
                 } catch (clickErr) {
-                  // fallback to JS click
                   await handle.evaluate((el) => el.click()).catch(() => {});
                 }
-                await this.page.waitForTimeout(300);
+                await this.page.waitForTimeout(1000);
                 return;
               }
               try {
                 await element.scrollIntoViewIfNeeded();
                 await element.click({ force: true });
               } catch (clickErr) {
-                // JS click fallback
                 await element.evaluate((el) => el.click()).catch(() => {});
               }
-              await this.page.waitForTimeout(300);
+              await this.page.waitForTimeout(1000);
               return;
             } catch (e) {
               // try next candidate
@@ -360,8 +367,8 @@ class FormBuilderPage extends BasePage {
   async verifyControlProperties(controlName) {
     const ctx = await this._getBuilderContext();
     const root = ctx.type === 'frame' ? ctx.frame : this.page;
-    const propPanel = root.locator('div.property-pane, div.editor-details').first();
-    await propPanel.waitFor({ state: 'visible', timeout: 20000 });
+    const propPanel = root.locator('div.property-pane, div.editor-details, [data-testid*="property"], [class*="property"]').first();
+    await expect(propPanel).toBeVisible({ timeout: 20000 });
 
     const checks = [
       `text=${controlName}`,
@@ -381,6 +388,63 @@ class FormBuilderPage extends BasePage {
     }
 
     throw new Error(`Property panel did not show expected content after selecting ${controlName}`);
+  }
+
+  async _assertPanelTextVisible(panel, text, timeout = 10000) {
+    await expect(panel.getByText(text, { exact: false }).first()).toBeVisible({ timeout });
+  }
+
+  async _assertPanelButtonVisible(panel, name, timeout = 10000) {
+    await expect(panel.getByRole('button', { name: new RegExp(name, 'i') }).first()).toBeVisible({ timeout });
+  }
+
+  async verifyTextBoxPropertiesPanel() {
+    const ctx = await this._getBuilderContext();
+    const root = ctx.type === 'frame' ? ctx.frame : this.page;
+    const panel = root.locator('div.property-pane, div.editor-details, [data-testid*="property"], [class*="property"]').first();
+
+    await expect(panel).toBeVisible({ timeout: 30000 });
+    const panelText = (await panel.innerText()).toLowerCase();
+    expect(panelText).toContain('properties');
+    await expect(panel.getByText(/^Properties - Text Box$/i).first()).toBeVisible({ timeout: 30000 });
+
+    const visibleTexts = [
+      'Element ID',
+      'Element label',
+      'Default value',
+      'Formatting',
+      'Reset',
+      'Delete',
+    ];
+
+    for (const text of visibleTexts) {
+      await this._assertPanelTextVisible(panel, text);
+    }
+
+    return true;
+  }
+
+  async verifySelectFilePropertiesPanel() {
+    const ctx = await this._getBuilderContext();
+    const root = ctx.type === 'frame' ? ctx.frame : this.page;
+    const panel = root.locator('div.property-pane, div.editor-details, [data-testid*="property"], [class*="property"]').first();
+
+    await expect(panel).toBeVisible({ timeout: 30000 });
+    const panelText = (await panel.innerText()).toLowerCase();
+    expect(panelText).toContain('properties');
+
+    const visibleTexts = [
+      'Element ID',
+      'Element label',
+      'Reset',
+      'Delete',
+    ];
+
+    for (const text of visibleTexts) {
+      await this._assertPanelTextVisible(panel, text);
+    }
+
+    return true;
   }
 
   async verifyRightPanelInteractions(controlName, expectedValue = '') {

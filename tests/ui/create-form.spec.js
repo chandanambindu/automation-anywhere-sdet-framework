@@ -57,14 +57,16 @@ if (!USERNAME || !PASSWORD) {
       await formBuilder.dragSelectFile();
       expect(await formBuilder.waitForControlOnCanvas('Select File')).toBeTruthy();
 
-      // Validate right-panel interactions when each control is selected
+      // Validate the right-side properties panel for each control before continuing
       await formBuilder.clickControlOnCanvas('Text Box');
       expect(await formBuilder.verifyControlProperties('Text Box')).toBeTruthy();
+      expect(await formBuilder.verifyTextBoxPropertiesPanel()).toBeTruthy();
       expect(await formBuilder.verifyRightPanelInteractions('Text Box', 'Automation Anywhere assignment')).toBeTruthy();
       expect(await formBuilder.enterText('Automation Anywhere assignment')).toBeTruthy();
 
       await formBuilder.clickControlOnCanvas('Select File');
       expect(await formBuilder.verifyControlProperties('Select File')).toBeTruthy();
+      expect(await formBuilder.verifySelectFilePropertiesPanel()).toBeTruthy();
       expect(await formBuilder.verifyRightPanelInteractions('Select File')).toBeTruthy();
 
       const fileDetails = fileHelper.getUploadFileDetails();
