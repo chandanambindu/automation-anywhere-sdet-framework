@@ -65,6 +65,7 @@ if (!USERNAME || !PASSWORD) {
       expect(await formBuilder.enterText('Automation Anywhere assignment')).toBeTruthy();
 
       await formBuilder.clickControlOnCanvas('Select File');
+      await page.waitForTimeout(1500); // Wait for panel to update after control selection
       expect(await formBuilder.verifyControlProperties('Select File')).toBeTruthy();
       expect(await formBuilder.verifySelectFilePropertiesPanel()).toBeTruthy();
       expect(await formBuilder.verifyRightPanelInteractions('Select File')).toBeTruthy();
