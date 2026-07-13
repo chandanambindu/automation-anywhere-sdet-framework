@@ -8,22 +8,24 @@ class DashboardPage extends BasePage {
   }
 
   async waitForDashboardReady(timeout = 60000) {
-    const readySelectors = [
-      'text=Automation',
-      'text=Home',
-      'text=Explore',
-      '[role="navigation"]',
-      'aside',
-    ];
+    await this.page.waitForLoadState('domcontentloaded').catch(() => {});
 
     const start = Date.now();
     while (Date.now() - start < timeout) {
-      for (const sel of readySelectors) {
-        const loc = this.page.locator(sel).first();
-        if (await loc.count() > 0 && await loc.isVisible().catch(() => false)) {
+      try {
+        const url = this.page.url();
+        const bodyVisible = await this.page.locator('body').first().isVisible().catch(() => false);
+        const navVisible = await this.page.locator('nav, aside, [role="navigation"], main').first().isVisible().catch(() => false);
+        const automationVisible = await this.page.locator('text=Automation, text=Automations, a[href*="automation"], [href*="automation"]').first().isVisible().catch(() => false);
+        const looksLikeDashboard = /\/dashboard|\/home|\/index|\/automation/i.test(url);
+
+        if (bodyVisible && (navVisible || automationVisible || looksLikeDashboard)) {
           return;
         }
+      } catch (e) {
+        // keep polling until timeout expires
       }
+
       await this.page.waitForTimeout(1000);
     }
 

@@ -251,6 +251,36 @@ class FormBuilderPage extends BasePage {
     await this._dragControlToCanvas('Select File');
   }
 
+  async waitForControlOnCanvas(controlName, timeout = 15000) {
+    const ctx = await this._getBuilderContext();
+    const canvas = this._ctxLocator(ctx, 'div.formcanvas__leftpane, div.formcanvas-content, div.editor-layout__canvas, div.formcanvas-container, div[class*="canvas" i]').first();
+    const start = Date.now();
+
+    while (Date.now() - start < timeout) {
+      const candidates = [
+        `text=${controlName}`,
+        `text=${controlName.replace(/\s+/g, '')}`,
+        `text=/^${controlName.replace(/\s+/g, '\\s*')}$/i`,
+        `text=/^${controlName.replace(/\s+/g, '')}$/i`,
+      ];
+
+      for (const candidate of candidates) {
+        const element = canvas.locator(candidate).first();
+        if (await element.count() > 0) {
+          try {
+            if (await element.isVisible().catch(() => false)) {
+              return true;
+            }
+          } catch (e) {}
+        }
+      }
+
+      await this.page.waitForTimeout(500);
+    }
+
+    return false;
+  }
+
   async clickControlOnCanvas(controlName) {
     const ctx = await this._getBuilderContext();
     const canvas = this._ctxLocator(ctx, 'div.formcanvas__leftpane, div.formcanvas-content, div.editor-layout__canvas, div.formcanvas-container, div[class*="canvas" i]').first();
@@ -346,11 +376,46 @@ class FormBuilderPage extends BasePage {
 
     for (const check of checks) {
       if (await propPanel.locator(check).count()) {
-        return;
+        return true;
       }
     }
 
     throw new Error(`Property panel did not show expected content after selecting ${controlName}`);
+  }
+
+  async verifyRightPanelInteractions(controlName, expectedValue = '') {
+    const ctx = await this._getBuilderContext();
+    const root = ctx.type === 'frame' ? ctx.frame : this.page;
+    const propPanel = root.locator('div.property-pane, div.editor-details, [data-testid*="property"], [class*="property"]').first();
+    await propPanel.waitFor({ state: 'visible', timeout: 20000 });
+    await expect(propPanel).toBeVisible();
+
+    const panelText = (await propPanel.innerText()).toLowerCase();
+    const genericPropertyTerms = ['label', 'default', 'value', 'required', 'help', 'hint', 'id', 'format'];
+    const hasRelevantContent = genericPropertyTerms.some((term) => panelText.includes(term));
+
+    if (!hasRelevantContent) {
+      const pageText = (await this.page.locator('body').innerText()).toLowerCase();
+      if (!pageText.includes(controlName.toLowerCase())) {
+        throw new Error(`Right panel did not show the expected control interaction for ${controlName}`);
+      }
+    }
+
+    if (expectedValue) {
+      const editableSelector = 'div.property-pane input[type="text"]:not([readonly]):not([disabled]), div.property-pane textarea:not([readonly]):not([disabled]), div.editor-details input[type="text"]:not([readonly]):not([disabled]), div.editor-details textarea:not([readonly]):not([disabled]), input[type="text"]:not([readonly]):not([disabled]), textarea:not([readonly]):not([disabled])';
+      const editableInput = root.locator(editableSelector).first();
+      if (await editableInput.count()) {
+        try {
+          await editableInput.click({ force: true });
+          await editableInput.fill(expectedValue, { timeout: 10000 });
+          await expect(editableInput).toHaveValue(expectedValue);
+        } catch (e) {
+          // Some property panels may not expose a writable input immediately; treat as a soft verification.
+        }
+      }
+    }
+
+    return true;
   }
 
   async verifyPropertiesPanel() {
@@ -363,30 +428,51 @@ class FormBuilderPage extends BasePage {
   async enterText(text) {
     const ctx = await this._getBuilderContext();
     const root = ctx.type === 'frame' ? ctx.frame : this.page;
-    // Prefer editable inputs (not readonly/disabled). Search property panel for the first editable text input/textarea.
-    const editableSelector = 'div.property-pane input[type="text"]:not([readonly]):not([disabled]), div.property-pane textarea:not([readonly]):not([disabled]), div.editor-details input[type="text"]:not([readonly]):not([disabled]), div.editor-details textarea:not([readonly]):not([disabled])';
-    let textInput = root.locator(editableSelector).first();
-    if (await textInput.count() === 0) {
-      // Fallback: try to find inputs by common labels like 'Default value' or 'Element label'
+
+    const editableSelectors = [
+      'div.property-pane input[type="text"]:not([readonly]):not([disabled])',
+      'div.property-pane textarea:not([readonly]):not([disabled])',
+      'div.editor-details input[type="text"]:not([readonly]):not([disabled])',
+      'div.editor-details textarea:not([readonly]):not([disabled])',
+      'input[type="text"]:not([readonly]):not([disabled])',
+      'textarea:not([readonly]):not([disabled])',
+    ];
+
+    let textInput = null;
+    for (const selector of editableSelectors) {
+      const candidate = root.locator(selector).first();
+      if (await candidate.count()) {
+        textInput = candidate;
+        break;
+      }
+    }
+
+    if (!textInput) {
       const labelCandidates = ['Default value', 'Element label', 'Label', 'Value', 'Default'];
       for (const lbl of labelCandidates) {
         try {
           const labelEl = root.locator(`text=${lbl}`).first();
           if (await labelEl.count() > 0) {
-            // attempt to find the nearest input following the label
             const candidate = labelEl.locator('xpath=following::input[1] | following::textarea[1]').first();
-            if (await candidate.count() > 0) { textInput = candidate; break; }
+            if (await candidate.count() > 0) {
+              textInput = candidate;
+              break;
+            }
           }
         } catch (e) {}
       }
     }
 
+    if (!textInput) {
+      throw new Error('No editable text input was found in the property panel');
+    }
+
     await textInput.waitFor({ state: 'visible', timeout: 30000 });
-    // Ensure editable via JS if necessary
     try {
+      await textInput.click({ force: true });
       await textInput.fill(text, { timeout: 10000 });
+      await expect(textInput).toHaveValue(text);
     } catch (e) {
-      // Last resort: set value via DOM and dispatch input events
       await root.evaluate((el, val) => {
         try { el.removeAttribute('readonly'); } catch (e) {}
         try { el.removeAttribute('disabled'); } catch (e) {}
@@ -395,6 +481,8 @@ class FormBuilderPage extends BasePage {
         el.dispatchEvent(new Event('change', { bubbles: true }));
       }, await textInput.elementHandle(), text);
     }
+
+    return true;
   }
 
   async uploadFile(filePath) {

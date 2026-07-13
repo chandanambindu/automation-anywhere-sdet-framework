@@ -51,23 +51,28 @@ if (!USERNAME || !PASSWORD) {
 
       await formBuilder.waitForBuilderReady(60000);
 
-      // Drag the requested controls onto the canvas
+      // Drag the requested controls onto the canvas and verify they appear
       await formBuilder.dragTextBox();
+      expect(await formBuilder.waitForControlOnCanvas('Text Box')).toBeTruthy();
       await formBuilder.dragSelectFile();
+      expect(await formBuilder.waitForControlOnCanvas('Select File')).toBeTruthy();
 
-      // Basic validation that the controls were added and interact with properties
+      // Validate right-panel interactions when each control is selected
       await formBuilder.clickControlOnCanvas('Text Box');
-      await formBuilder.verifyControlProperties('Text Box');
-      // Enter text into the Text Box control
-      await formBuilder.enterText('Sample input from automation');
+      expect(await formBuilder.verifyControlProperties('Text Box')).toBeTruthy();
+      expect(await formBuilder.verifyRightPanelInteractions('Text Box', 'Automation Anywhere assignment')).toBeTruthy();
+      expect(await formBuilder.enterText('Automation Anywhere assignment')).toBeTruthy();
 
       await formBuilder.clickControlOnCanvas('Select File');
-      await formBuilder.verifyControlProperties('Select File');
+      expect(await formBuilder.verifyControlProperties('Select File')).toBeTruthy();
+      expect(await formBuilder.verifyRightPanelInteractions('Select File')).toBeTruthy();
 
       const fileDetails = fileHelper.getUploadFileDetails();
       const filePath = fileDetails.filePath;
       const uploadSuccess = await formBuilder.uploadFile(filePath);
       expect(uploadSuccess).toBeTruthy();
+      const fileName = filePath.split('/').pop();
+      expect(await formBuilder.verifyUploadedFileIndicator(fileName)).toBeTruthy();
 
       // Save the form and verify save success
       await formBuilder.saveForm();
